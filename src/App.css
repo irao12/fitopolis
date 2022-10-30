@@ -1,0 +1,27 @@
+@font-face {
+	font-family: JetBrainsMono;
+	src: url(./fonts/JetBrainsMono-VariableFont_wght.ttf);
+}
+
+:root {
+	--main-navy: #202a44;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	height: 100%;
+}
+
+.App {
+	height: 100%;
+	font-family: sans-serif;
+}

@@ -1,0 +1,54 @@
+nav {
+	height: 15rem;
+	background-color: var(--main-navy);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem 3rem;
+	gap: 2rem;
+	position: relative;
+}
+
+.logo {
+	color: white;
+	align-self: flex-start;
+	font-size: 3rem;
+	font-family: "JetBrainsMono", snas-serif;
+	text-decoration: none;
+	order: 0;
+}
+
+.search {
+	order: 2;
+	width: 100%;
+}
+
+.side-buttons {
+	display: flex;
+	gap: 1rem;
+	order: 1;
+	position: absolute;
+	right: 3rem;
+}
+
+@media only screen and (min-width: 900px) {
+	nav {
+		height: 12rem;
+		flex-direction: row;
+		padding: 0rem 3rem;
+		gap: 10rem;
+	}
+	.logo {
+		align-self: center;
+		font-size: 3rem;
+	}
+	.search {
+		order: 1;
+		width: 90%;
+	}
+	.side-buttons {
+		position: static;
+		order: 2;
+	}
+}
