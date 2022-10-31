@@ -3,6 +3,18 @@
 	src: url(./fonts/JetBrainsMono-VariableFont_wght.ttf);
 }
 
+@font-face {
+	font-family: Blinker;
+	src: url(./fonts/Blinker-Regular.ttf);
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: Blinker;
+	src: url(./fonts/Blinker-Bold.ttf);
+	font-weight: 700;
+}
+
 :root {
 	--main-navy: #202a44;
 }
@@ -13,15 +25,19 @@
 	box-sizing: border-box;
 }
 
+html,
+body,
+#root,
+.App {
+	height: 100%;
+}
+
 html {
 	font-size: 62.5%;
 }
 
-body {
-	height: 100%;
-}
-
 .App {
-	height: 100%;
 	font-family: sans-serif;
+	display: flex;
+	flex-direction: column;
 }
