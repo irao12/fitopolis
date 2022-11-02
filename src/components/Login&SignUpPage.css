@@ -1,0 +1,43 @@
+
+.auth-form-container, .login-form, .signUp-form{
+    display: flex;
+    flex-direction: column;
+    margin: 6.5rem 30rem;
+}
+
+.auth-form-container{
+    border:0.1rem solid gray;
+    border-radius: 1rem;
+}
+
+h1{
+    padding: 1rem;
+    text-align: center;
+    font-family:Arial;
+}
+
+label{
+    text-align: left;
+    padding: 0.28rem 0;
+    font-size: medium;
+}
+
+input{
+    margin:0.5rem 0;
+    padding: 1rem;
+    border-color: black;
+    border-radius: 1rem;;
+}
+
+button{
+    border:none;
+    background-color:lightgray;
+    padding: 0.8rem;
+    border-radius: 1rems;
+}
+
+.link-btn{
+    background: none;
+    color:black;
+    text-decoration: underline;
+}
