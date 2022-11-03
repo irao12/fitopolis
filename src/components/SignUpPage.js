@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import "./Login&SignUpPage.css";
 
 export default function SignUp(props) {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [name, setName] = useState("");
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		password: "",
+		conPassword: "",
+	});
+
+	const handleChange = (event) => {
+		setFormData({
+			...formData,
+			[event.target.name]: event.target.value,
+		});
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(email);
+		console.log(formData.email);
 	};
 
 	return (
@@ -16,15 +26,21 @@ export default function SignUp(props) {
 			<h1>Sign Up</h1>
 			<form className="signUp-form" onSubmit={handleSubmit}>
 				<label htmlFor="name">Full Name</label>
-				<input type="name" id="name" name="name" value={name} />
+				<input
+					type="name"
+					id="name"
+					name="name"
+					value={formData.name}
+					onChange={handleChange}
+				/>
 
 				<label htmlFor="email">Email</label>
 				<input
 					type="email"
 					id="email"
 					name="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					value={formData.email}
+					onChange={handleChange}
 				/>
 
 				<label htmlFor="password">Password</label>
@@ -32,16 +48,17 @@ export default function SignUp(props) {
 					type="password"
 					id="password"
 					name="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					value={formData.password}
+					onChange={handleChange}
 				/>
 
 				<label htmlFor="conPass">Confirm Password</label>
 				<input
 					type="password"
 					id="password"
-					name="password"
-					value={password}
+					name="conPassword"
+					value={formData.conPassword}
+					onChange={handleChange}
 				/>
 
 				<button type="submit">Log In</button>

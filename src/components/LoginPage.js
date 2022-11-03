@@ -2,12 +2,21 @@ import React, { useState } from "react";
 import "./Login&SignUpPage.css";
 
 export default function Login(props) {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	});
+
+	const handleChange = (event) => {
+		setFormData({
+			...formData,
+			[event.target.name]: event.target.value,
+		});
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(email);
+		console.log(formData.email);
 	};
 
 	return (
@@ -19,8 +28,8 @@ export default function Login(props) {
 					type="email"
 					id="email"
 					name="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					value={formData.email}
+					onChange={handleChange}
 				/>
 
 				<label htmlFor="password">Password</label>
@@ -28,8 +37,8 @@ export default function Login(props) {
 					type="password"
 					id="password"
 					name="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					value={formData.password}
+					onChange={handleChange}
 				/>
 
 				<button type="submit">Log In</button>
