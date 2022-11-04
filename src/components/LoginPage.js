@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Login&SignUpPage.css";
 
 export default function Login(props) {
@@ -43,12 +44,11 @@ export default function Login(props) {
 
 				<button type="submit">Log In</button>
 			</form>
-			<button
-				className="link-btn"
-				onClick={() => props.onFormSwitch("signUp")}
-			>
-				Don't have an account? Sign up here
-			</button>
+			<Link className="signup-link" to="/signup">
+				<button type="button" className="link-btn">
+					Don't have an account? Sign up here
+				</button>
+			</Link>
 		</div>
 	);
 }
