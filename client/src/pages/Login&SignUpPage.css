@@ -1,0 +1,63 @@
+.auth-form-container {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	max-width: 50rem;
+	margin: auto;
+	padding: 15rem 3rem;
+}
+
+.login-form,
+.signUp-form {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin: auto;
+	padding: 1rem 0;
+}
+
+.auth-form-container {
+	border: 0.1rem solid gray;
+	border-radius: 1rem;
+}
+
+h1 {
+	padding: 1rem;
+	text-align: center;
+	font-family: Arial;
+}
+
+label {
+	text-align: left;
+	padding: 0.28rem 0;
+	font-size: medium;
+}
+
+.login-form input,
+.signUp-form input {
+	margin: 0.5rem 0;
+	padding: 1rem;
+	border-color: black;
+	border-radius: 1rem;
+}
+
+.login-form button,
+.signUp-form button {
+	border: none;
+	background-color: lightgray;
+	padding: 0.8rem;
+	border-radius: 1rems;
+}
+
+.login-link,
+.signup-link {
+	display: flex;
+	justify-content: center;
+}
+
+.link-btn {
+	background: none;
+	color: black;
+	text-decoration: underline;
+	cursor: pointer;
+}

@@ -38,6 +38,4 @@ html {
 
 .App {
 	font-family: sans-serif;
-	display: flex;
-	flex-direction: column;
 }

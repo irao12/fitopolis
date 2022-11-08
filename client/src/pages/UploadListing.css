@@ -1,0 +1,56 @@
+main.upload--page {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.upload-form {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	max-width: 50rem;
+	margin: auto;
+	padding: 1rem 0;
+}
+
+.upload-form input,
+.upload-form textarea {
+	margin: 0.5rem 0;
+	padding: 1rem;
+	border-color: black;
+	border-width: 0.2rem;
+	border-radius: 1rem;
+	font-family: sans-serif;
+}
+
+.upload-form input {
+	text-align: center;
+}
+
+.upload-form textarea {
+	resize: none;
+	height: 5rem;
+	width: 100%;
+	padding: 1rem;
+	height: 13rem;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	resize: none;
+}
+
+input#price-dollars {
+	border-right: none;
+	outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
