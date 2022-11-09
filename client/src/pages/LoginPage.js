@@ -15,7 +15,7 @@ export default function Login(props) {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(formData.email);
 	};

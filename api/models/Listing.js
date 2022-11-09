@@ -36,10 +36,10 @@ module.exports = (sequelize, DataTypes) => {
 					isNumeric: true,
 				},
 			},
-			// images: {
-			// 	type: DataTypes.ARRAY(DataTypes.BLOB("long")), // <- type for image ( database :postgresql )
-			// 	allowNull: false,
-			// },
+			images: {
+				type: DataTypes.ARRAY(DataTypes.STRING), // <- type for image ( database :postgresql )
+				allowNull: false,
+			},
 			isActive: {
 				type: DataTypes.BOOLEAN,
 			},

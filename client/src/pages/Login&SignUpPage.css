@@ -3,8 +3,8 @@
 	flex-direction: column;
 	width: 80%;
 	max-width: 50rem;
-	margin: auto;
-	padding: 15rem 3rem;
+	margin: 1rem auto;
+	padding: 10rem 3rem;
 }
 
 .login-form,
@@ -44,9 +44,13 @@ label {
 .login-form button,
 .signUp-form button {
 	border: none;
-	background-color: lightgray;
-	padding: 0.8rem;
+	background-color: var(--main-navy);
+	border-radius: 1rem;
+	color: white;
+	padding: 1.5rem;
 	border-radius: 1rems;
+	cursor: pointer;
+	margin-top: 2rem;
 }
 
 .login-link,
@@ -60,4 +64,5 @@ label {
 	color: black;
 	text-decoration: underline;
 	cursor: pointer;
+	border: none;
 }

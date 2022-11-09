@@ -17,12 +17,12 @@ app.use("/api", require("./controllers"));
 
 // for production use, we serve the static react build folder
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
+	app.use(express.static(path.join(__dirname, "../client/build")));
 
-  // all unknown routes should be handed to our react app
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  });
+	// all unknown routes should be handed to our react app
+	app.get("*", function (req, res) {
+		res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+	});
 }
 
 // update DB tables based on model updates. Does not handle renaming tables/columns
@@ -31,7 +31,7 @@ db.sequelize.sync({ force: false });
 
 // start up the server
 if (PORT) {
-  app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+	app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 } else {
-  console.log("===== ERROR ====\nCREATE A .env FILE!\n===== /ERROR ====");
+	console.log("===== ERROR ====\nCREATE A .env FILE!\n===== /ERROR ====");
 }

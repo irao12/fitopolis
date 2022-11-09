@@ -21,14 +21,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-	let { content } = req.body;
-	Listing.create({ content })
-		.then((newListing) => {
-			res.status(201).json(newListing);
-		})
-		.catch((err) => {
-			res.status(400).json(err);
-		});
+	let body = req.body;
+	console.log(body);
+	// Listing.create({ content })
+	// 	.then((newListing) => {
+	// 		res.status(201).json(newListing);
+	// 	})
+	// 	.catch((err) => {
+	// 		res.status(400).json(err);
+	// 	});
 });
 
 router.get("/:id", (req, res) => {
