@@ -25,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
 					isDecimal: true,
 				},
 			},
+			shipping: {
+				type: DataTypes.DECIMAL,
+				validate: {
+					isDecimal: true,
+				},
+			},
 			quantity: {
 				type: DataTypes.INTEGER,
 				validate: {

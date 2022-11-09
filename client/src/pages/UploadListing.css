@@ -1,7 +1,5 @@
-main.upload--page {
-	width: 100%;
-	display: flex;
-	justify-content: center;
+main.upload-page {
+	margin-top: 2rem;
 }
 
 .upload-form {
@@ -19,9 +17,15 @@ main.upload--page {
 	margin: 0.5rem 0;
 	padding: 1rem;
 	border-color: black;
+	border-style: solid;
 	border-width: 0.2rem;
 	border-radius: 1rem;
 	font-family: sans-serif;
+}
+.upload-form input.invalid,
+.upload-form textarea.invalid {
+	border-color: red;
+	outline: red;
 }
 
 .upload-form input {
