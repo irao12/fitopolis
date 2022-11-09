@@ -1,0 +1,20 @@
+main.not-found-page {
+	height: 80%;
+	display: flex;
+	gap: 5rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+main.not-found-page h1 {
+	font-size: 5rem;
+}
+
+main.not-found-page h2 {
+	font-size: 3rem;
+}
+
+main.not-found-page > a {
+	font-size: 2rem;
+}

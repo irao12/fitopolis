@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import UploadListing from "./pages/UploadListing";
+import NotFound from "./pages/NotFound";
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 							path="create-listing"
 							element={<UploadListing />}
 						></Route>
+						<Route path="*" element={<NotFound />}></Route>
 					</Route>
 				</Routes>
 			</BrowserRouter>
