@@ -64,4 +64,5 @@ input[type="number"] {
 	height: 5rem;
 	border-radius: 1rem;
 	font-size: 2rem;
+	cursor: pointer;
 }

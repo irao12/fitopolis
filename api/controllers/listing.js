@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const { Listing } = db;
+const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
 
 // This is a simple example for providing basic CRUD routes for
 // a resource/model. It provides the following:
@@ -21,15 +23,41 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-	let body = req.body;
-	console.log(body);
-	// Listing.create({ content })
-	// 	.then((newListing) => {
-	// 		res.status(201).json(newListing);
-	// 	})
-	// 	.catch((err) => {
-	// 		res.status(400).json(err);
-	// 	});
+	let { data } = req.body;
+	const imageURLs = [];
+
+	// convert each image in base64 to a .png file and save it in the file system
+	data.images.forEach((imageBase64) => {
+		// obtain unique filename
+		const uniqueFileName = uuidv4() + ".png";
+
+		// obtain file data from imageBase64
+		const base64Image = imageBase64.split(";base64,").pop();
+
+		fs.writeFile(
+			"./listingImages/" + uniqueFileName,
+			base64Image,
+			{ encoding: "base64" },
+			(err) => {
+				console.log("File created");
+			}
+		);
+
+		// add url to an array, to save to database
+		imageURLs.push(uniqueFileName);
+	});
+
+	// change data.images so the database only saves the url
+	data.images = imageURLs;
+
+	Listing.create(data)
+		.then((newListing) => {
+			res.status(201).json(newListing);
+		})
+		.catch((err) => {
+			res.status(400).json(err);
+			console.log(err);
+		});
 });
 
 router.get("/:id", (req, res) => {
@@ -50,7 +78,33 @@ router.put("/:id", (req, res) => {
 			return res.sendStatus(404);
 		}
 
-		listing.content = req.body.content;
+		const { data } = req.body;
+		const imageURLs = [];
+
+		// convert each image in base64 to a .png file and save it in the file system
+		data.images.forEach((imageBase64) => {
+			// obtain unique filename
+			const uniqueFileName = uuidv4() + ".png";
+
+			// obtain file data from imageBase64
+			const base64Image = imageBase64.split(";base64,").pop();
+
+			fs.writeFile(
+				"./images/" + uniqueFileName,
+				base64Image,
+				{ encoding: "base64" },
+				(err) => {
+					console.log("File created");
+				}
+			);
+
+			// add url to an array, to save to database
+			imageURLs.push(uniqueFileName);
+		});
+
+		data.images = imageURLs;
+
+		listing.data = data;
 		listing
 			.save()
 			.then((updatedListing) => {

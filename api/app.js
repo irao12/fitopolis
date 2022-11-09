@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 // this lets us parse 'application/json' content in http requests
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
 // add http request logging to help us debug and audit app use
 const logFormat = process.env.NODE_ENV === "production" ? "combined" : "dev";

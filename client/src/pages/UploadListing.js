@@ -30,6 +30,11 @@ export default function UploadListing() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		console.log("submitted");
+		const imageList = formData.imageList.map((image) => {
+			return image.data_url;
+		});
+		console.log(imageList);
+
 		try {
 			let response = await fetch("/api/listing", {
 				method: "POST",
@@ -37,7 +42,14 @@ export default function UploadListing() {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(formData),
+				body: JSON.stringify({
+					data: {
+						sellerID: 1,
+						...formData,
+						images: imageList,
+						isActive: true,
+					},
+				}),
 			});
 		} catch (error) {
 			console.error("Server error while creating a new listing", error);
