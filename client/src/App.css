@@ -17,6 +17,16 @@
 
 :root {
 	--main-navy: #202a44;
+	--navbar-height: 15rem;
+}
+
+@media only screen and (min-width: 900px) {
+	:root {
+		--navbar-height: 12rem;
+	}
+}
+
+@media screen and (min-width) {
 }
 
 * {

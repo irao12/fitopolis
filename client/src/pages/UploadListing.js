@@ -180,33 +180,40 @@ export default function UploadListing() {
 				)}
 
 				<label htmlFor="price">Price:</label>
-				<input
-					type="number"
-					name="price"
-					id="price"
-					min="0"
-					step="0.01"
-					value={formData.price}
-					onChange={handleFormChange}
-					required
-					className={!isPriceValid ? "invalid" : ""}
-				></input>
+				<div className="input-group price-group">
+					<p>$</p>
+					<input
+						type="number"
+						name="price"
+						id="price"
+						min="0"
+						step="0.01"
+						value={formData.price}
+						onChange={handleFormChange}
+						required
+						className={!isPriceValid ? "invalid" : ""}
+					></input>
+				</div>
 				{!isPriceValid && (
 					<Error message="* Price must be greater than 0" />
 				)}
 
-				<label htmlFor="shipping">Shipping:</label>
-				<input
-					type="number"
-					name="shipping"
-					id="shipping"
-					min="0"
-					step="0.01"
-					value={formData.shipping}
-					onChange={handleFormChange}
-					required
-					className={!isShippingValid ? "invalid" : ""}
-				></input>
+				<label htmlFor="shipping">Shipping Fee:</label>
+				<div className="input-group shipping-group">
+					<p>$</p>
+					<input
+						type="number"
+						name="shipping"
+						id="shipping"
+						min="0"
+						step="0.01"
+						value={formData.shipping}
+						onChange={handleFormChange}
+						required
+						className={!isShippingValid ? "invalid" : ""}
+					></input>
+				</div>
+
 				{!isShippingValid && (
 					<Error message="* Shipping must be 0 or higher" />
 				)}

@@ -34,7 +34,7 @@ nav {
 
 @media only screen and (min-width: 900px) {
 	nav {
-		height: 12rem;
+		height: var(--navbar-height);
 		flex-direction: row;
 		padding: 0rem 3rem;
 		gap: 10rem;
