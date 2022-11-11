@@ -4,6 +4,7 @@ import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import OrderHistory from "./pages/OrderHistory";
 import UploadListing from "./pages/UploadListing";
 import NotFound from "./pages/NotFound";
 
@@ -17,6 +18,7 @@ function App() {
 						<Route index element={<HomePage />}></Route>
 						<Route path="login" element={<LoginPage />}></Route>
 						<Route path="signup" element={<SignUpPage />}></Route>
+						<Route path="orders" element={<OrderHistory />}></Route>
 						<Route
 							path="create-listing"
 							element={<UploadListing />}

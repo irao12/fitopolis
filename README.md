@@ -73,8 +73,13 @@ For local development you will need two terminals open, one for the api-backend 
 _Clone_ this app, then:
 
 ```bash
+<<<<<<< HEAD
 In fitopolis folder:
 # api-backend terminal 1
+=======
+# api-backend terminal 1
+cp .env.example .env
+>>>>>>> df3113f91f13be24d3a9cc9f320e783fe96ad763
 npm install
 npm run dev
 ```

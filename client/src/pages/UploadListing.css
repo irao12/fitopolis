@@ -70,3 +70,26 @@ input[type="number"] {
 	font-size: 2rem;
 	cursor: pointer;
 }
+
+.input-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.price-group,
+.shipping-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1rem;
+}
+
+.price-group > p,
+.shipping-group > p {
+	font-size: 2rem;
+}
+
+.price-group > input,
+.shipping-group > input {
+	flex: 1;
+}
