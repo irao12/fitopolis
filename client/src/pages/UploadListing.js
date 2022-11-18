@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./UploadListing.css";
 import ListingImageUploader from "../components/ListingImageUploader";
+import Select from "react-select";
 import Error from "../components/Error";
 
 export default function UploadListing() {
@@ -11,7 +12,16 @@ export default function UploadListing() {
 		shipping: 0,
 		quantity: 0,
 		imageList: [],
+		condition: "",
 	});
+
+	const [conditionOption, setCondtionOption] = React.useState({});
+
+	const conditionOptions = [
+		{ value: "new", label: "New" },
+		{ value: "pre-owned", label: "Pre-owned" },
+		{ value: "open-box", label: "Open-box" },
+	];
 
 	// state to keep track of which inputs are valid
 	const [isTitleValid, setIsTitleValid] = useState(true);
@@ -19,6 +29,7 @@ export default function UploadListing() {
 	const [isShippingValid, setIsShippingValid] = useState(true);
 	const [isQuantityValid, setIsQuantityValid] = useState(true);
 	const [isImageListValid, setIsImageListValid] = useState(true);
+	const [isConditionValid, setIsConditionValid] = useState(true);
 
 	const validateTitle = (title) => {
 		// title cannot be empty
@@ -27,6 +38,7 @@ export default function UploadListing() {
 			return false;
 		} else {
 			setIsTitleValid(true);
+			return true;
 		}
 	};
 
@@ -37,6 +49,7 @@ export default function UploadListing() {
 			return false;
 		} else {
 			setIsPriceValid(true);
+			return true;
 		}
 	};
 
@@ -47,6 +60,7 @@ export default function UploadListing() {
 			return false;
 		} else {
 			setIsShippingValid(true);
+			return true;
 		}
 	};
 
@@ -57,6 +71,7 @@ export default function UploadListing() {
 			return false;
 		} else {
 			setIsQuantityValid(true);
+			return true;
 		}
 	};
 
@@ -67,16 +82,30 @@ export default function UploadListing() {
 			return false;
 		} else {
 			setIsImageListValid(true);
+			return true;
+		}
+	};
+
+	const validateCondition = (condition) => {
+		if (condition.length === 0) {
+			setIsConditionValid(false);
+			return false;
+		} else {
+			setIsConditionValid(true);
+			return true;
 		}
 	};
 
 	const validateForm = () => {
 		let isValid = true;
+
 		if (!validateTitle(formData.title)) isValid = false;
 		if (!validatePrice(formData.price)) isValid = false;
 		if (!validateQuantity(formData.quantity)) isValid = false;
 		if (!validateImageList(formData.imageList)) isValid = false;
 		if (!validateShipping(formData.shipping)) isValid = false;
+		if (!validateCondition(formData.condition)) isValid = false;
+
 		return isValid;
 	};
 
@@ -96,6 +125,9 @@ export default function UploadListing() {
 			case "quantity":
 				validateQuantity(value);
 				break;
+			case "condition":
+				validateCondition(value);
+				break;
 			default:
 				break;
 		}
@@ -113,9 +145,16 @@ export default function UploadListing() {
 		setFormData({ ...formData, imageList: newImageList });
 	};
 
+	const handleConditionChange = (selectedOption) => {
+		setCondtionOption(selectedOption);
+		setFormData({ ...formData, condition: selectedOption.value });
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (validateForm()) return;
+		if (!validateForm()) {
+			return;
+		}
 		console.log("submitted");
 
 		const imageList = formData.imageList.map((image) => {
@@ -178,6 +217,16 @@ export default function UploadListing() {
 				{!isImageListValid && (
 					<Error message="* Must include at least one image" />
 				)}
+
+				<label htmlFor="condition">Condition</label>
+				<Select
+					name="condition"
+					value={conditionOption}
+					onChange={handleConditionChange}
+					options={conditionOptions}
+					className="react-select-container"
+					classNamePrefix="react-select"
+				/>
 
 				<label htmlFor="price">Price:</label>
 				<div className="input-group price-group">

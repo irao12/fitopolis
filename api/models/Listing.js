@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
 					isNumeric: true,
 				},
 			},
+			condition: {
+				type: DataTypes.STRING,
+			},
 			images: {
 				type: DataTypes.ARRAY(DataTypes.STRING), // <- type for image ( database :postgresql )
 				allowNull: false,

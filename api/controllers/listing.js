@@ -19,7 +19,9 @@ const fs = require("fs");
 //    /listing comes from the file ./listing.js
 
 router.get("/", (req, res) => {
-	Listing.findAll({}).then((allListings) => res.json(allListings));
+	Listing.findAll({ order: [["updatedAt", "DESC"]] }).then((allListings) =>
+		res.json(allListings)
+	);
 });
 
 router.post("/", (req, res) => {
@@ -34,8 +36,12 @@ router.post("/", (req, res) => {
 		// obtain file data from imageBase64
 		const base64Image = imageBase64.split(";base64,").pop();
 
+		if (!fs.existsSync("./client/public/listingImages")) {
+			fs.mkdirSync("./client/public/listingImages");
+		}
+
 		fs.writeFile(
-			"./listingImages/" + uniqueFileName,
+			"./client/public/listingImages/" + uniqueFileName,
 			base64Image,
 			{ encoding: "base64" },
 			(err) => {

@@ -2,6 +2,10 @@ main.upload-page {
 	margin-top: 2rem;
 }
 
+.upload-page h1 {
+	text-align: center;
+}
+
 .upload-form {
 	display: flex;
 	flex-direction: column;
@@ -92,4 +96,27 @@ input[type="number"] {
 .price-group > input,
 .shipping-group > input {
 	flex: 1;
+}
+
+div.react-select__control {
+	border-color: black;
+	border-width: 0.2rem;
+	outline-color: black;
+}
+
+.react-select__control {
+	font-size: 1.7rem;
+}
+
+div.react-select__control:hover {
+	border-color: var(--main-navy);
+}
+
+div.react-select__control--is-focused {
+	border-color: black;
+	box-shadow: none;
+}
+
+div.react-select__menu {
+	font-size: 1.5rem;
 }
