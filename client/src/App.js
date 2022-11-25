@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import UploadListing from "./pages/UploadListing";
+import CatalogPage from "./pages/CatalogPage";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
 							path="create-listing"
 							element={<UploadListing />}
 						></Route>
+						<Route path="catalog" element={<CatalogPage />}>
+							{/* <Route path="/:id"></Route> */}
+						</Route>
 						<Route path="*" element={<NotFound />}></Route>
 					</Route>
 				</Routes>

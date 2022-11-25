@@ -21,7 +21,8 @@
 	border-radius: 1rem;
 }
 
-h1 {
+.login-form h1,
+.signUp-form h1 {
 	padding: 1rem;
 	text-align: center;
 	font-family: Arial;
