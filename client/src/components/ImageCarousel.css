@@ -1,0 +1,41 @@
+.listing-image-carousel {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.carousel-image {
+	margin: auto;
+	width: 80%;
+}
+
+.carousel-button {
+	padding: 1rem 1rem;
+	border: none;
+	cursor: pointer;
+	opacity: 50%;
+	background-color: #fffefe;
+	position: absolute;
+	height: 20%;
+}
+
+.previous-image-button {
+	left: 0;
+}
+
+.next-image-button {
+	right: 0;
+}
+
+.carousel-button:hover {
+	opacity: 1;
+	background-color: #797878;
+}
+
+@media screen and (min-width: 700px) {
+	.carousel-image {
+		width: 100%;
+		max-width: 50rem;
+	}
+}

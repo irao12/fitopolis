@@ -1,0 +1,45 @@
+:root {
+	--listing-width: 22rem;
+	--listing-height: 35rem;
+}
+
+.listing-link {
+	max-width: var(--listing-width);
+	text-decoration: none;
+	color: black;
+}
+
+.listing {
+	font-family: "Blinker";
+	max-width: var(--listing-width);
+	height: var(--listing-height);
+	border: 1px solid #cccbcb;
+	border-radius: 0.6rem;
+	overflow: hidden;
+}
+
+.listing-info {
+	margin-top: 1rem;
+	padding: 0.5rem 2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.listing > img {
+	width: var(--listing-width);
+	height: calc(var(--listing-width) - 2rem);
+	object-fit: cover;
+	border-bottom: 1px solid #d9d3d3;
+}
+
+.listing-info > h1 {
+	font-weight: 400;
+	font-size: 2rem;
+	margin-bottom: 0.4rem;
+}
+
+.listing-info p {
+	margin-bottom: 0.4rem;
+	font-size: 1.6rem;
+	text-transform: capitalize;
+}
