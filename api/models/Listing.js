@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
 
 	Listing.init(
 		{
+			id: {
+				type: DataTypes.INTEGER,
+				autoIncrement: true,
+				primaryKey: true,
+			},
 			sellerID: {
 				type: DataTypes.INTEGER,
 			},

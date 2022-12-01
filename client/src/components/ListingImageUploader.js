@@ -14,7 +14,7 @@ export default function ListingImageUploader({
 			onChange={onChange}
 			maxNumber={maxImageCount}
 			dataURLKey="data_url"
-			acceptType={["jpg", "png"]}
+			acceptType={["jpg", "png", "jpeg"]}
 		>
 			{({
 				imageList,
