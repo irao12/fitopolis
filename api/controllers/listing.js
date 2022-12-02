@@ -4,6 +4,7 @@ const db = require("../models");
 const { Listing } = db;
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
+const { Op } = require("sequelize");
 
 // This is a simple example for providing basic CRUD routes for
 // a resource/model. It provides the following:
@@ -64,6 +65,28 @@ router.post("/", (req, res) => {
 			res.status(400).json(err);
 			console.log(err);
 		});
+});
+
+router.get("/search/:searchQuery", (req, res) => {
+	const { searchQuery } = req.params;
+
+	Listing.findAll({
+		where: {
+			[Op.or]: [
+				{
+					title: {
+						[Op.iRegexp]: `.*${searchQuery}.*`,
+					},
+				},
+				{
+					description: {
+						[Op.iRegexp]: `.*${searchQuery}.*`,
+					},
+				},
+			],
+		},
+		order: [["updatedAt", "DESC"]],
+	}).then((allListings) => res.json(allListings));
 });
 
 router.get("/:id", (req, res) => {

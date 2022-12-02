@@ -8,6 +8,7 @@ import UploadListing from "./pages/UploadListing";
 import CatalogPage from "./pages/CatalogPage";
 import ListingPage from "./pages/ListingPage";
 import NotFound from "./pages/NotFound";
+import { useState } from "react";
 
 function App() {
 	return (
