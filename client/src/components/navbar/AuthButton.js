@@ -1,25 +1,33 @@
 import React, { useContext } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
 const classes = "btn btn-primary";
 
-const AuthButton = withRouter(({ history }) => {
-    const auth = useContext(AuthContext);
-    if(!auth.isAuthenticated){
-        return <Link className={classes} to="/login">Login</Link>;
-    }
+const AuthButton = () => {
+	const navigate = useNavigate();
 
-    const logout = () => {
-        auth.signout().then(() => history.push("/"));
-    }
+	const auth = useContext(AuthContext);
+	if (!auth.isAuthenticated) {
+		return (
+			<Link className={classes} to="/login">
+				Login
+			</Link>
+		);
+	}
 
-    return (
-        <div className="auth-text">
-            Hi! {auth.user.firstName}
-            <button className={classes} onClick={logout}>Logout</button>
-        </div>
-    );
-});
+	const logout = () => {
+		auth.signout().then(() => navigate("/"));
+	};
+
+	return (
+		<div className="auth-text">
+			Hi! {auth.user.firstName}
+			<button className={classes} onClick={logout}>
+				Logout
+			</button>
+		</div>
+	);
+};
 
 export default AuthButton;
