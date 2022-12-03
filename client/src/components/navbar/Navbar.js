@@ -6,6 +6,7 @@ import Search from "./Search";
 import IconButton from "../IconButton";
 import AccountIcon from "../../icons/account.svg";
 import CartIcon from "../../icons/cart.svg";
+import AuthButton from "./AuthButton";
 
 export default function Navbar() {
 	return (
@@ -15,6 +16,7 @@ export default function Navbar() {
 			</Link>
 			<Search></Search>
 			<div className="side-buttons">
+				<AuthButton />
 				<IconButton img={AccountIcon} alt={"Account"} role="account" />
 				<IconButton img={CartIcon} alt={"Cart"} role="cart" />
 			</div>

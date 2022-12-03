@@ -4,7 +4,8 @@ import "./Login&SignUpPage.css";
 
 export default function SignUp(props) {
 	const [formData, setFormData] = useState({
-		name: "",
+		firstName: "",
+		lastName:"",
 		email: "",
 		password: "",
 		conPassword: "",
@@ -26,12 +27,21 @@ export default function SignUp(props) {
 		<div className="auth-form-container">
 			<h1>Sign Up</h1>
 			<form className="signUp-form" onSubmit={handleSubmit}>
-				<label htmlFor="name">Full Name</label>
+				<label htmlFor="firstName">First Name</label>
 				<input
-					type="name"
-					id="name"
-					name="name"
-					value={formData.name}
+					type="firstName"
+					id="firstName"
+					name="firstName"
+					value={formData.firstName}
+					onChange={handleChange}
+				/>
+
+                <label htmlFor="lastName">Last Name</label>
+				<input
+					type="lastName"
+					id="lastName"
+					name="lastName"
+					value={formData.LastName}
 					onChange={handleChange}
 				/>
 
@@ -62,12 +72,12 @@ export default function SignUp(props) {
 					onChange={handleChange}
 				/>
 
-				<button type="submit">Log In</button>
+				<button type="submit">Register</button>
 			</form>
 
 			<Link className="login-link" to="/login">
 				<button type="button" className="link-btn">
-					Already have an account? Sign in here
+					Already have an account? Login here
 				</button>
 			</Link>
 		</div>

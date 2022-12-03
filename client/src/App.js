@@ -6,10 +6,12 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import UploadListing from "./pages/UploadListing";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 	return (
 		<div className="App">
+		  <AuthProvider>
 			<BrowserRouter>
 				<Navbar />
 				<Routes>
@@ -25,6 +27,7 @@ function App() {
 					</Route>
 				</Routes>
 			</BrowserRouter>
+		  </AuthProvider>
 		</div>
 	);
 }
