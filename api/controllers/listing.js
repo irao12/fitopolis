@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
-const { Listing } = db;
+const { listing: Listing } = db;
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const { Op } = require("sequelize");
