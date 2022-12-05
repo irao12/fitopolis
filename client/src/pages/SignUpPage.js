@@ -2,47 +2,61 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login&SignUpPage.css";
 
-export default function SignUp(props) {
-	const [formData, setFormData] = useState({
+export default function SignUp() {
+	const [inputs, setInputs] = useState({
 		firstName: "",
-		lastName:"",
+		lastName: "",
 		email: "",
 		password: "",
-		conPassword: "",
+		confirmPassword:""
 	});
+    
+	const {firstName, lastName, email, password, confirmPassword} = inputs;
 
-	const handleChange = (event) => {
-		setFormData({
-			...formData,
-			[event.target.name]: event.target.value,
-		});
+	const handleInputChange = (event) => {
+		setInputs({...inputs, [event.target.name] : event.target.value });
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(formData.email);
+
+	const onSubmitForm = async (event) => {
+	    event.preventDefault();
+
+		try {
+			const body = {firstName, lastName, email, password, confirmPassword};
+
+			const response = await fetch("/api/auth/signup",{
+				method: "POST",
+				headers: {"Content-Type" : "application/json"},
+				body: JSON.stringify(body)
+			});
+
+			const parseResponse = await response.json();
+            console.log(parseResponse);
+		} catch (error) {
+			console.error(error.message);
+		}
 	};
 
 	return (
 		<div className="auth-form-container">
 			<h1>Sign Up</h1>
-			<form className="signUp-form" onSubmit={handleSubmit}>
+			<form className="signUp-form" onSubmit={onSubmitForm}>
 				<label htmlFor="firstName">First Name</label>
 				<input
-					type="firstName"
+					type="text"
 					id="firstName"
 					name="firstName"
-					value={formData.firstName}
-					onChange={handleChange}
+					value={firstName}
+					onChange={(event) => handleInputChange(event)}
 				/>
 
                 <label htmlFor="lastName">Last Name</label>
 				<input
-					type="lastName"
+					type="text"
 					id="lastName"
 					name="lastName"
-					value={formData.LastName}
-					onChange={handleChange}
+					value={lastName}
+					onChange={(event) => handleInputChange(event)}
 				/>
 
 				<label htmlFor="email">Email</label>
@@ -50,8 +64,8 @@ export default function SignUp(props) {
 					type="email"
 					id="email"
 					name="email"
-					value={formData.email}
-					onChange={handleChange}
+					value={email}
+					onChange={(event) => handleInputChange(event)}
 				/>
 
 				<label htmlFor="password">Password</label>
@@ -59,20 +73,20 @@ export default function SignUp(props) {
 					type="password"
 					id="password"
 					name="password"
-					value={formData.password}
-					onChange={handleChange}
+					value={password}
+					onChange={(event) => handleInputChange(event)}
 				/>
 
-				<label htmlFor="conPass">Confirm Password</label>
+				<label htmlFor="confirmPassword">Confirm Password</label>
 				<input
 					type="password"
-					id="password"
-					name="conPassword"
-					value={formData.conPassword}
-					onChange={handleChange}
+					id="confirmPassword"
+					name="confirmPassword"
+					value={confirmPassword}
+					onChange={(event) => handleInputChange(event)}
 				/>
 
-				<button type="submit">Register</button>
+				<button  type="submit">Submit</button>
 			</form>
 
 			<Link className="login-link" to="/login">
