@@ -8,30 +8,29 @@ export default function SignUp() {
 		lastName: "",
 		email: "",
 		password: "",
-		confirmPassword:""
+		confirmPassword: "",
 	});
-    
-	const {firstName, lastName, email, password, confirmPassword} = inputs;
+
+	const { firstName, lastName, email, password, confirmPassword } = inputs;
 
 	const handleInputChange = (event) => {
-		setInputs({...inputs, [event.target.name] : event.target.value });
+		setInputs({ ...inputs, [event.target.name]: event.target.value });
 	};
 
-
 	const onSubmitForm = async (event) => {
-	    event.preventDefault();
+		event.preventDefault();
 
 		try {
-			const body = {firstName, lastName, email, password, confirmPassword};
+			const body = { firstName, lastName, email, password };
 
-			const response = await fetch("/api/auth/signup",{
+			const response = await fetch("/api/auth/signup", {
 				method: "POST",
-				headers: {"Content-Type" : "application/json"},
-				body: JSON.stringify(body)
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
 			});
 
 			const parseResponse = await response.json();
-            console.log(parseResponse);
+			console.log(parseResponse);
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -50,7 +49,7 @@ export default function SignUp() {
 					onChange={(event) => handleInputChange(event)}
 				/>
 
-                <label htmlFor="lastName">Last Name</label>
+				<label htmlFor="lastName">Last Name</label>
 				<input
 					type="text"
 					id="lastName"
@@ -86,7 +85,7 @@ export default function SignUp() {
 					onChange={(event) => handleInputChange(event)}
 				/>
 
-				<button  type="submit">Submit</button>
+				<button type="submit">Submit</button>
 			</form>
 
 			<Link className="login-link" to="/login">
