@@ -4,7 +4,15 @@
 	width: 80%;
 	max-width: 50rem;
 	margin: 1rem auto;
-	padding: 10rem 3rem;
+	padding: 5rem 1rem;
+	border: 0.1rem solid gray;
+	border-radius: 1rem;
+}
+
+.auth-form-container h1 {
+	padding: 1rem;
+	text-align: center;
+	font-family: Arial;
 }
 
 .login-form,
@@ -13,19 +21,7 @@
 	flex-direction: column;
 	width: 80%;
 	margin: auto;
-	padding: 1rem 0;
-}
-
-.auth-form-container {
-	border: 0.1rem solid gray;
-	border-radius: 1rem;
-}
-
-.login-form h1,
-.signUp-form h1 {
-	padding: 1rem;
-	text-align: center;
-	font-family: Arial;
+	padding: 0.5rem 0;
 }
 
 label {

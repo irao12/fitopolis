@@ -1,23 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login&SignUpPage.css";
 
+import { AuthContext } from "../context/AuthContext";
+
 export default function Login(props) {
-	const [formData, setFormData] = useState({
+	const navigate = useNavigate();
+
+	const [inputs, setInputs] = useState({
+		redirectToReferrer: false,
+		failed: false,
 		email: "",
 		password: "",
 	});
 
+	const auth = React.useContext(AuthContext);
+
+	const { email, password } = inputs;
+
 	const handleChange = (event) => {
-		setFormData({
-			...formData,
-			[event.target.name]: event.target.value,
-		});
+		setInputs({ ...inputs, [event.target.name]: event.target.value });
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(formData.email);
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		auth.authenticate(email, password)
+			.then((user) => {
+				setInputs({ ...inputs, redirectToReferrer: true });
+				navigate("/");
+			})
+			.catch((error) => {
+				setInputs({ ...inputs, failed: true });
+			});
 	};
 
 	return (
@@ -29,8 +44,8 @@ export default function Login(props) {
 					type="email"
 					id="email"
 					name="email"
-					value={formData.email}
-					onChange={handleChange}
+					value={email}
+					onChange={(e) => handleChange(e)}
 				/>
 
 				<label htmlFor="password">Password</label>
@@ -38,8 +53,8 @@ export default function Login(props) {
 					type="password"
 					id="password"
 					name="password"
-					value={formData.password}
-					onChange={handleChange}
+					value={password}
+					onChange={(e) => handleChange(e)}
 				/>
 
 				<button type="submit">Log In</button>
