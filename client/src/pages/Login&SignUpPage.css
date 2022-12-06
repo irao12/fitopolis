@@ -1,3 +1,11 @@
+.login-page,
+.sign-up-page {
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .auth-form-container {
 	display: flex;
 	flex-direction: column;

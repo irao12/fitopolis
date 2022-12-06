@@ -1,5 +1,5 @@
 .catalog-page {
-	height: 100%;
+	height: calc(100% - var(--navbar-height));
 	width: 100%;
 	display: flex;
 	flex-direction: column;

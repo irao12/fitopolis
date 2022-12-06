@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
 
 import Search from "./Search";
@@ -11,6 +12,7 @@ import AuthButton from "./AuthButton";
 export default function Navbar() {
 	const [search, setSearch] = useState("");
 	const navigate = useNavigate();
+	const auth = useContext(AuthContext);
 
 	const searchCatalog = () => {
 		navigate(`/catalog?search=${search}`);
@@ -27,9 +29,15 @@ export default function Navbar() {
 				searchCatalog={searchCatalog}
 			></Search>
 			<div className="side-buttons">
-				<AuthButton />
-				<IconButton img={AccountIcon} alt={"Account"} role="account" />
+				{auth.isAuthenticated && (
+					<IconButton
+						img={AccountIcon}
+						alt={"Account"}
+						role="account"
+					/>
+				)}
 				<IconButton img={CartIcon} alt={"Cart"} role="cart" />
+				<AuthButton />
 			</div>
 		</nav>
 	);

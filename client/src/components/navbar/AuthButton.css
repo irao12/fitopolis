@@ -1,10 +1,35 @@
 .auth-btn {
-	text-size-adjust: 2rem;
-	font-size: medium;
-	color: black;
+	width: 4rem;
+	height: 4rem;
+	color: var(--main-navy);
+	background-color: white;
+	border: none;
+	border-radius: 0.5rem;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	font-family: "Blinker";
+	font-size: 1.6rem;
+}
+
+.log-out-button {
+	width: 4rem;
+	height: 4rem;
+	flex-shrink: 0;
+	font-family: "Blinker";
+	color: var(--main-navy);
+	background-color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	font-size: 1.6rem;
 }
 
 .auth-btn h1 {
 	font-size: small;
 	color: black;
+}
+
+.auth-btn:visited {
+	color: var(--main-navy);
 }
