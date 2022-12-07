@@ -18,8 +18,6 @@ export default function Navbar() {
 		navigate(`/catalog?search=${search}`);
 	};
 
-	console.log(auth.isAuthenticated);
-
 	return (
 		<nav className="navbar">
 			<Link className="logo" to="/">

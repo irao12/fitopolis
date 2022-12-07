@@ -15,9 +15,13 @@ export default function UploadListing() {
 		condition: "",
 	});
 
-	const [conditionOption, setCondtionOption] = React.useState({});
+	const [conditionOption, setCondtionOption] = React.useState({
+		label: "Select a condition",
+		value: "",
+	});
 
 	const conditionOptions = [
+		{ value: "", label: "Select a condition" },
 		{ value: "new", label: "New" },
 		{ value: "pre-owned", label: "Pre-owned" },
 		{ value: "open-box", label: "Open-box" },
@@ -148,6 +152,7 @@ export default function UploadListing() {
 	const handleConditionChange = (selectedOption) => {
 		setCondtionOption(selectedOption);
 		setFormData({ ...formData, condition: selectedOption.value });
+		validateCondition(selectedOption.value);
 	};
 
 	const handleSubmit = async (event) => {
@@ -223,10 +228,15 @@ export default function UploadListing() {
 					name="condition"
 					value={conditionOption}
 					onChange={handleConditionChange}
+					placeholder=""
 					options={conditionOptions}
 					className="react-select-container"
 					classNamePrefix="react-select"
+					defaultValue={{ label: 2002, value: 2002 }}
 				/>
+				{!isConditionValid && (
+					<Error message="* Must select a condition"></Error>
+				)}
 
 				<label htmlFor="price">Price:</label>
 				<div className="input-group price-group">

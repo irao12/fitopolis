@@ -4,8 +4,8 @@ import "./NoAuthenticationPage.css";
 
 export default function NoAuthenticationPage() {
 	return (
-		<div class="no-authentication-page">
-			<div class="no-authentication-message">
+		<div className="no-authentication-page">
+			<div className="no-authentication-message">
 				<h1> You will need to log in in order to access this page</h1>
 				<Link to="/login">LOG IN</Link>
 			</div>
