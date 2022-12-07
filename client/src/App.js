@@ -10,6 +10,7 @@ import CatalogPage from "./pages/CatalogPage";
 import ListingPage from "./pages/ListingPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
 	return (
@@ -26,7 +27,10 @@ function App() {
 								element={<SignUpPage />}
 							></Route>
 
-<Route path="orders" element={<OrderHistory />}></Route>
+							<Route
+								path="orders"
+								element={<OrderHistory />}
+							></Route>
 
 							<Route
 								path="create-listing"

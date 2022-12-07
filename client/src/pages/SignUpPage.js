@@ -44,62 +44,64 @@ export default function SignUp() {
 	};
 
 	return (
-		<div className="auth-form-container">
-			<h1>Sign Up</h1>
-			<form className="signUp-form" onSubmit={onSubmitForm}>
-				<label htmlFor="firstName">First Name</label>
-				<input
-					type="text"
-					id="firstName"
-					name="firstName"
-					value={firstName}
-					onChange={(event) => handleInputChange(event)}
-				/>
+		<div className="sign-up-page">
+			<div className="auth-form-container">
+				<h1>Sign Up</h1>
+				<form className="signUp-form" onSubmit={onSubmitForm}>
+					<label htmlFor="firstName">First Name</label>
+					<input
+						type="text"
+						id="firstName"
+						name="firstName"
+						value={firstName}
+						onChange={(event) => handleInputChange(event)}
+					/>
 
-				<label htmlFor="lastName">Last Name</label>
-				<input
-					type="text"
-					id="lastName"
-					name="lastName"
-					value={lastName}
-					onChange={(event) => handleInputChange(event)}
-				/>
+					<label htmlFor="lastName">Last Name</label>
+					<input
+						type="text"
+						id="lastName"
+						name="lastName"
+						value={lastName}
+						onChange={(event) => handleInputChange(event)}
+					/>
 
-				<label htmlFor="email">Email</label>
-				<input
-					type="email"
-					id="email"
-					name="email"
-					value={email}
-					onChange={(event) => handleInputChange(event)}
-				/>
+					<label htmlFor="email">Email</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						value={email}
+						onChange={(event) => handleInputChange(event)}
+					/>
 
-				<label htmlFor="password">Password</label>
-				<input
-					type="password"
-					id="password"
-					name="password"
-					value={password}
-					onChange={(event) => handleInputChange(event)}
-				/>
+					<label htmlFor="password">Password</label>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						value={password}
+						onChange={(event) => handleInputChange(event)}
+					/>
 
-				<label htmlFor="confirmPassword">Confirm Password</label>
-				<input
-					type="password"
-					id="confirmPassword"
-					name="confirmPassword"
-					value={confirmPassword}
-					onChange={(event) => handleInputChange(event)}
-				/>
+					<label htmlFor="confirmPassword">Confirm Password</label>
+					<input
+						type="password"
+						id="confirmPassword"
+						name="confirmPassword"
+						value={confirmPassword}
+						onChange={(event) => handleInputChange(event)}
+					/>
 
-				<button type="submit">Submit</button>
-			</form>
+					<button type="submit">Submit</button>
+				</form>
 
-			<Link className="login-link" to="/login">
-				<button type="button" className="link-btn">
-					Already have an account? Login here
-				</button>
-			</Link>
+				<Link className="login-link" to="/login">
+					<button type="button" className="link-btn">
+						Already have an account? Login here
+					</button>
+				</Link>
+			</div>
 		</div>
 	);
 }

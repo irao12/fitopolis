@@ -1,5 +1,5 @@
 nav {
-	height: 15rem;
+	height: var(--navbar-height);
 	background-color: var(--main-navy);
 	display: flex;
 	flex-direction: column;
@@ -13,10 +13,13 @@ nav {
 .logo {
 	color: white;
 	align-self: flex-start;
-	font-size: 3rem;
-	font-family: "JetBrainsMono", snas-serif;
+	font-size: 2rem;
+	font-family: "JetBrainsMono", sans-serif;
 	text-decoration: none;
 	order: 0;
+	height: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .search {

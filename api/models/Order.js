@@ -24,11 +24,6 @@ module.exports = (sequelize, DataTypes) => {
 			orderDetails: {
 				type: DataTypes.JSON,
 			},
-
-			dateCreated: {
-
-			}
-			
 		},
 		{
 			sequelize,

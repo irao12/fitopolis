@@ -1,10 +1,23 @@
 .auth-btn {
-	text-size-adjust: 2rem;
-	font-size: medium;
-	color: black;
+	height: 4rem;
+	font-family: "Blinker";
+	font-size: 1.6rem;
+	color: var(--main-navy);
+	text-decoration: none;
+	background-color: white;
+	border: none;
+	border-radius: 0.5rem;
+	display: flex;
+	align-items: center;
+	padding: 0.2rem;
 }
 
-.auth-btn h1 {
-	font-size: small;
-	color: black;
+.log-out-button {
+	font-family: "Blinker";
+	font-size: 1.5rem;
+	background-color: white;
+	height: 4rem;
+	border-radius: 0.5rem;
+	border: none;
+	padding: 0.2rem;
 }
