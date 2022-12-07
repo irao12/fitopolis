@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login&SignUpPage.css";
 
 export default function SignUp() {
+	const navigate = useNavigate();
+
 	const [inputs, setInputs] = useState({
 		firstName: "",
 		lastName: "",
@@ -36,8 +38,8 @@ export default function SignUp() {
 			});
 
 			const parseResponse = await response.json();
-			console.log(parseResponse.email);
 			alert(`${parseResponse.email}, your account created successfully!`);
+			navigate("/");
 		} catch (error) {
 			console.error(error.message);
 		}

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./UploadListing.css";
 import ListingImageUploader from "../components/ListingImageUploader";
 import Select from "react-select";
 import Error from "../components/Error";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadListing() {
+	const auth = useContext(AuthContext);
+	const navigate = useNavigate();
+
 	const [formData, setFormData] = useState({
 		title: "",
 		description: "",
@@ -175,15 +180,18 @@ export default function UploadListing() {
 				},
 				body: JSON.stringify({
 					data: {
-						sellerID: 1,
+						sellerID: auth.user.id,
 						...formData,
 						price: Math.round(formData.price * 100) / 100,
 						shipping: Math.round(formData.shipping * 100) / 100,
 						images: imageList,
 						isActive: true,
 					},
+					sellerID: auth.user.id,
 				}),
 			});
+			const listingInfo = await response.json();
+			await navigate(`/catalog/${listingInfo.id}`);
 		} catch (error) {
 			console.error("Server error while creating a new listing", error);
 		}

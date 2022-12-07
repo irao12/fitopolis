@@ -60,9 +60,7 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 
-	Listing.associate = (models) => {
-		// associations can be defined here
-	};
+	Listing.associate = (models) => {};
 
 	return Listing;
 };
