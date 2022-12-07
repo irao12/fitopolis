@@ -6,44 +6,29 @@ module.exports = (sequelize, DataTypes) => {
 
 	Order.init(
 		{
-			id: {
+			orderID: {
 				type: DataTypes.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
-			sellerID: {
-				type: DataTypes.INTEGER,
-			},
-			title: {
-				type: DataTypes.STRING,
-				validate: {
-					len: [3, 250],
-					notEmpty: true,
-				},
-			},
-			price: {
-				type: DataTypes.DECIMAL,
-				validate: {
-					isDecimal: true,
-				},
-			},
-			shipping: {
-				type: DataTypes.DECIMAL,
-				validate: {
-					isDecimal: true,
-				},
-			},
-			quantity: {
-				type: DataTypes.INTEGER,
-				validate: {
-					min: 1,
-					isNumeric: true,
-				},
-			},
-			condition: {
-				type: DataTypes.STRING,
+				allowNull: false,
 			},
 
+			sellerID: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
+
+			buyerID: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
+
+			orderDetails: {
+				type: DataTypes.JSON,
+			},
+
+			dateCreated: {
+
+			}
+			
 		},
 		{
 			sequelize,
