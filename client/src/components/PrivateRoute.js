@@ -1,26 +1,14 @@
 import React, { useContext } from "react";
-import { Navigate, Route } from "react-router-dom";
+import NoAuthenticationPage from "../pages/NoAuthenticationPage";
+import { Navigate } from "react-router-dom";
 
 import { AuthContext } from "../context/AuthContext";
 
-export default function PrivateRoute({ component: Component, ...rest }) {
+export default function PrivateRoute({ children }) {
 	const auth = useContext(AuthContext);
+	if (!auth.isAuthenticated) {
+		return <NoAuthenticationPage />;
+	}
 
-	return (
-		<Route
-			{...rest}
-			render={(props) =>
-				auth.isAuthenticated === true ? (
-					<Component {...props} />
-				) : (
-					<Navigate
-						to={{
-							pathname: "/login",
-							state: { from: props.location },
-						}}
-					/>
-				)
-			}
-		/>
-	);
+	return children;
 }

@@ -1,0 +1,23 @@
+.no-authentication-page {
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+}
+
+.no-authentication-message {
+	width: 50%;
+	text-align: center;
+	margin: auto;
+}
+
+.no-authentication-message h1 {
+	margin-bottom: 5rem;
+}
+
+.no-authentication-page a {
+	text-decoration: none;
+	font-size: 1.6rem;
+	color: white;
+	background-color: var(--main-navy);
+	padding: 1.5rem 4rem;
+	border-radius: 0.8rem;
+}

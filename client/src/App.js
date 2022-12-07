@@ -34,7 +34,11 @@ function App() {
 
 							<Route
 								path="create-listing"
-								element={<UploadListing />}
+								element={
+									<PrivateRoute>
+										<UploadListing />
+									</PrivateRoute>
+								}
 							></Route>
 							<Route
 								path="catalog"
