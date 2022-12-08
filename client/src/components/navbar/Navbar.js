@@ -18,6 +18,10 @@ export default function Navbar() {
 		navigate(`/catalog?search=${search}`);
 	};
 
+	const go_to_cart = () => {
+		navigate("/cart");
+	};
+
 	return (
 		<nav className="navbar">
 			<Link className="logo" to="/">
@@ -36,7 +40,12 @@ export default function Navbar() {
 						role="account"
 					/>
 				)}
-				<IconButton img={CartIcon} alt={"Cart"} role="cart" />
+				<IconButton
+					img={CartIcon}
+					alt={"Cart"}
+					role="cart"
+					handleClick={go_to_cart}
+				/>
 				<AuthButton />
 			</div>
 		</nav>

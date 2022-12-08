@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./ListingPage.css";
 import ImageCarousel from "../components/ImageCarousel";
+import { CartContext } from "../context/CartContext";
 
 export default function ListingPage() {
 	const [loading, setLoading] = React.useState(false);
 	const [listingData, setListingData] = React.useState({});
 	const [quantity, setQuantity] = React.useState(1);
+	const [displayAdded, setDisplayAdded] = React.useState(false);
 
 	const { id } = useParams();
+	const cart = useContext(CartContext);
 
 	const incrementQuantity = () => {
 		if (quantity + 1 > Number.parseInt(listingData.quantity)) return;
@@ -37,6 +40,10 @@ export default function ListingPage() {
 		} catch (error) {
 			console.error(error);
 		}
+	};
+
+	const addListingToCart = () => {
+		cart.addToCart(listingData, quantity);
 	};
 
 	useEffect(() => {
@@ -78,8 +85,18 @@ export default function ListingPage() {
 							</button>
 						</div>
 					</div>
-					<button className="add-to-cart-button" type="button">
-						Add To Cart
+					<button
+						className="add-to-cart-button"
+						type="button"
+						onClick={() => {
+							addListingToCart();
+							setDisplayAdded(true);
+							setTimeout(() => {
+								setDisplayAdded(false);
+							}, 3000);
+						}}
+					>
+						{displayAdded ? "Added To Cart!" : "Add To Cart"}
 					</button>
 				</div>
 			</div>
