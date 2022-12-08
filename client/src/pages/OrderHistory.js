@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./OrderHistory.css";	
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-export default function orders() {
-	const styleObj = {
-		fontSize: 33,
-		color: "navy",
-		textAlign: "center",
-		paddingTop: "30px",
-	}
+export default function GetOrderHistory() {
+    const [orderID, setorderID] = useState("");
+    const [buyerID, setbuyerID] = useState("");
+    const [sellerID, setsellerID] = useState("");
+    const [orderDetails, setorderDetails] = useState("");
+    const [dateCreated, setdateCreated] = useState("");
+
+    // This runs on-mount if you pass it an empty array as second param
+     useEffect(() => {
+        fetch(`/api/order/${orderID}`)
+            .then(response => response.json())
+            .then(resp => {
+                // resp is the json the server sent back
+                // then we use the useState to update the state, which is then updated in the html by react
+                setorderID(resp.orderID)
+                setbuyerID(resp.buyerID)
+                setsellerID(resp.sellerID)
+                setorderDetails(resp.orderDetails)
+                setdateCreated(resp.dateCreated)
+            })
+            .catch(err => {
+            //handle error
+            })
+     }, [])
+
 
 	return (
 		<main className="orderPage" >
@@ -22,43 +42,14 @@ export default function orders() {
 			
 			<div className="order"> 
 			<div className="orderDetails"> 
-			<strong>Item:</strong> Blue White shoes<br />
-			<strong>Order ID:</strong> 123-456-7890<br />
-			<strong>Total:</strong> $123.45 <br />
-			<strong>Purchase Date:</strong> 12-31-2022 <br />
-			<strong>Seller:</strong> bob
+
+			<div>Order ID: {orderID}</div>
+            <div>Buyer ID: {buyerID}</div>
+            <div>Seller ID: {sellerID}</div>
+            <div>Order Details: {orderDetails}</div>
+            <div>Date purchased: {dateCreated}</div>
 			</div>
 	
-			<button type="button">Contact Support</button>
-			<button type="button" >Track Package</button>
-			<button type="button" >Leave the seller feedback</button>
-			<button type="button" >Send a message to the seller</button>
-			</div>
-
-			<div className="order"> 
-			<div className="orderDetails"> 
-			<strong>Item:</strong> Blue White shoes<br />
-			<strong>Order ID:</strong> 123-456-7890<br />
-			<strong>Total:</strong> $123.45 <br />
-			<strong>Purchase Date:</strong> 12-31-2022 <br />
-			<strong>Seller:</strong> bob
-			</div>
-		
-			<button type="button">Contact Support</button>
-			<button type="button" >Track Package</button>
-			<button type="button" >Leave the seller feedback</button>
-			<button type="button" >Send a message to the seller</button>
-			</div>
-
-			<div className="order"> 
-			<div className="orderDetails"> 
-			<strong>Item:</strong> Blue White shoes<br />
-			<strong>Order ID:</strong> 123-456-7890<br />
-			<strong>Total:</strong> $123.45 <br />
-			<strong>Purchase Date:</strong> 12-31-2022 <br />
-			<strong>Seller:</strong> bob
-			</div>
-
 			<button type="button">Contact Support</button>
 			<button type="button" >Track Package</button>
 			<button type="button" >Leave the seller feedback</button>

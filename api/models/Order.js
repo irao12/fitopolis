@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			orderID: {
 				type: DataTypes.INTEGER,
+				autoIncrement: true,
+				primaryKey: true,
 				allowNull: false,
 			},
 
