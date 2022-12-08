@@ -41,16 +41,20 @@ export default function CatalogPage() {
 
 	return (
 		<div className="catalog-page">
-			{listings.length === 0 && (
-				<div className="no-results-message">No Results</div>
-			)}
-			{listings.length > 0 && (
-				<div className="listings-container">
-					{listings.map((listing, index) => {
-						return <Listing key={index} listingData={listing} />;
-					})}
-				</div>
-			)}
+			<div className="catalog-section">
+				{listings.length === 0 && (
+					<div className="no-results-message">No Results</div>
+				)}
+				{listings.length > 0 && (
+					<div className="listings-container">
+						{listings.map((listing, index) => {
+							return (
+								<Listing key={index} listingData={listing} />
+							);
+						})}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

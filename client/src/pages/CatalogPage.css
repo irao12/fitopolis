@@ -1,12 +1,18 @@
 .catalog-page {
-	height: 100%;
+	height: calc(100%- var(--navbar-height));
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
 
+.catalog-section {
+	margin: auto;
+	width: min(90%, 100rem);
+}
+
 .listings-container {
-	padding: 5rem 10rem;
+	padding: 5rem 1rem;
+	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--listing-width), 1fr));
 	row-gap: 4rem;

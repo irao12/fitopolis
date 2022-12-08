@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 // this lets us parse 'application/json' content in http requests
-app.use(express.json({ limit: "5mb" }));
+app.use(express.json({ limit: "10mb" }));
 
 // setup passport and session cookies
 app.use(

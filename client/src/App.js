@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
+import AccountPage from "./pages/AccountPage";
 
 function App() {
 	return (
@@ -32,7 +33,14 @@ function App() {
 									path="signup"
 									element={<SignUpPage />}
 								></Route>
-
+								<Route
+									path="account"
+									element={
+										<PrivateRoute>
+											<AccountPage />
+										</PrivateRoute>
+									}
+								></Route>
 								<Route
 									path="orders"
 									element={<OrderHistory />}
@@ -55,7 +63,7 @@ function App() {
 									element={<ListingPage />}
 								></Route>
 								<Route
-									path="/cart"
+									path="cart"
 									element={<CartPage />}
 								></Route>
 								<Route path="*" element={<NotFound />}></Route>

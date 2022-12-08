@@ -18,8 +18,12 @@ export default function Navbar() {
 		navigate(`/catalog?search=${search}`);
 	};
 
-	const go_to_cart = () => {
+	const navigateToCart = () => {
 		navigate("/cart");
+	};
+
+	const navigateToAccount = () => {
+		navigate("/account");
 	};
 
 	return (
@@ -38,13 +42,14 @@ export default function Navbar() {
 						img={AccountIcon}
 						alt={"Account"}
 						role="account"
+						handleClick={navigateToAccount}
 					/>
 				)}
 				<IconButton
 					img={CartIcon}
 					alt={"Cart"}
 					role="cart"
-					handleClick={go_to_cart}
+					handleClick={navigateToCart}
 				/>
 				<AuthButton />
 			</div>

@@ -1,5 +1,7 @@
 .auth-btn {
+	flex-shrink: 0;
 	height: 4rem;
+	width: 4rem;
 	font-family: "Blinker";
 	font-size: 1.6rem;
 	color: var(--main-navy);

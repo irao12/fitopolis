@@ -1,0 +1,25 @@
+.account-page {
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+	flex-direction: column;
+}
+
+.account-section {
+	margin: 5rem auto;
+	padding: 5rem;
+	background-color: #f0efef;
+	width: min(90%, 60rem);
+	height: 100%;
+	border-radius: 1rem;
+}
+
+.welcome-message {
+	font-family: "Blinker";
+	word-spacing: 0.6rem;
+	font-size: 3.6rem;
+	margin-bottom: 3rem;
+}
+
+.account-actions button {
+	margin-bottom: 4rem;
+}

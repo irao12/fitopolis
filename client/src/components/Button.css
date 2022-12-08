@@ -1,0 +1,11 @@
+.interactive-button {
+	width: 100%;
+	height: 7rem;
+	background-color: var(--main-navy);
+	border: none;
+	color: white;
+	border-radius: 0.8rem;
+	font-size: 2.4rem;
+	font-family: "Blinker";
+	cursor: pointer;
+}
