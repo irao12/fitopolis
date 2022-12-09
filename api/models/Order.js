@@ -26,6 +26,18 @@ module.exports = (sequelize, DataTypes) => {
 			orderDetails: {
 				type: DataTypes.JSON,
 			},
+
+			//Order history will not display address.
+			address: {
+				type: DataTypes.STRING,
+			},
+			tracking: {
+				type: DataTypes.STRING,
+			},
+
+			completed: {
+				type: DataTypes.BOOLEAN,	
+			},
 		},
 		{
 			sequelize,

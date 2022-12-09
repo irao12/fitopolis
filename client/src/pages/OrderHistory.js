@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./OrderHistory.css";	
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export default function GetOrderHistory() {
     const [orderID, setorderID] = useState("");
@@ -9,6 +7,8 @@ export default function GetOrderHistory() {
     const [sellerID, setsellerID] = useState("");
     const [orderDetails, setorderDetails] = useState("");
     const [dateCreated, setdateCreated] = useState("");
+    const [tracking, setTracking] = useState("");
+    const [completed, setCompleted] = useState("");
 
     // This runs on-mount if you pass it an empty array as second param
      useEffect(() => {
@@ -22,6 +22,8 @@ export default function GetOrderHistory() {
                 setsellerID(resp.sellerID)
                 setorderDetails(resp.orderDetails)
                 setdateCreated(resp.dateCreated)
+                setTracking(resp.tracking)
+                setCompleted(completed)
             })
             .catch(err => {
             //handle error
