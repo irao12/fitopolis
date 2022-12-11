@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Error from "../components/Error";
 import "./Login&SignUpPage.css";
 
 import { AuthContext } from "../context/AuthContext";
@@ -13,10 +14,30 @@ export default function Login(props) {
 		email: "",
 		password: "",
 	});
-
+	const [errorMessage, setErrorMessage] = useState("");
 	const auth = React.useContext(AuthContext);
 
 	const { email, password } = inputs;
+	const [isEmailValid, setIsEmailValid] = useState(true);
+	const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+	const validateEmail = () => {
+		if (email === "") {
+			setIsEmailValid(false);
+			return false;
+		}
+		setIsEmailValid(true);
+		return true;
+	};
+
+	const validatePassword = () => {
+		if (password === "") {
+			setIsPasswordValid(false);
+			return false;
+		}
+		setIsPasswordValid(true);
+		return true;
+	};
 
 	const handleChange = (event) => {
 		setInputs({ ...inputs, [event.target.name]: event.target.value });
@@ -25,6 +46,10 @@ export default function Login(props) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		const emailValid = validateEmail();
+		const passwordValid = validatePassword();
+		if (!emailValid || !passwordValid) return;
+
 		auth.authenticate(email, password)
 			.then((user) => {
 				setInputs({ ...inputs, redirectToReferrer: true });
@@ -32,6 +57,7 @@ export default function Login(props) {
 			})
 			.catch((error) => {
 				setInputs({ ...inputs, failed: true });
+				setErrorMessage(error.message);
 			});
 	};
 
@@ -48,6 +74,9 @@ export default function Login(props) {
 						value={email}
 						onChange={(e) => handleChange(e)}
 					/>
+					{!isEmailValid && (
+						<Error message="* Please enter an email" />
+					)}
 
 					<label htmlFor="password">Password</label>
 					<input
@@ -58,6 +87,10 @@ export default function Login(props) {
 						onChange={(e) => handleChange(e)}
 					/>
 
+					{!isPasswordValid && (
+						<Error message="* Please enter a password" />
+					)}
+
 					<button type="submit">Log In</button>
 				</form>
 				<Link className="signup-link" to="/signup">
@@ -65,6 +98,7 @@ export default function Login(props) {
 						Don't have an account? Sign up here
 					</button>
 				</Link>
+				{errorMessage !== "" && <Error message={errorMessage} />}
 			</div>
 		</div>
 	);

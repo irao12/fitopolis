@@ -2,7 +2,6 @@
 .sign-up-pade {
 	height: calc(100% - var(--navbar-height));
 	display: flex;
-	align-items: center;
 }
 
 .auth-form-container {
@@ -10,7 +9,7 @@
 	flex-direction: column;
 	width: 80%;
 	max-width: 50rem;
-	margin: 1rem auto;
+	margin: 1.5rem auto;
 	padding: 5rem 1rem;
 	border: 0.1rem solid gray;
 	border-radius: 1rem;
@@ -29,6 +28,9 @@
 	width: 80%;
 	margin: auto;
 	padding: 0.5rem 0;
+}
+.login-form .error-msg {
+	text-align: left;
 }
 
 label {
@@ -69,4 +71,8 @@ label {
 	text-decoration: underline;
 	cursor: pointer;
 	border: none;
+}
+
+.login-page .error-msg {
+	margin: 1rem 0;
 }

@@ -7,7 +7,6 @@ const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState([]);
 	const [subtotal, setSubtotal] = useState(0);
 	const [shippingTotal, setShippingTotal] = useState(0);
-	const [total, setTotal] = useState(0);
 	const [cartInfo, setCartInfo] = useState([]);
 	const [sellers, setSellers] = useState([]);
 
