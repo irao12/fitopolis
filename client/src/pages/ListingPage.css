@@ -33,13 +33,14 @@
 }
 
 .listing-page-top .listing-price,
+.listing-page-top .listing-shipping,
 .listing-page-top .listing-condition {
 	text-align: center;
 	width: 100%;
-	font-size: 1.8rem;
+	font-size: 2rem;
 }
 
-.listing-page-top .listing-price {
+.listing-page-top .listing-shipping {
 	padding-bottom: 2rem;
 	margin-bottom: 2rem;
 	border-bottom: 1px solid rgb(187, 187, 187);

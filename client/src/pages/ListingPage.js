@@ -61,6 +61,10 @@ export default function ListingPage() {
 						(listingData.price * 100) /
 						100
 					).toFixed(2)}`}</p>
+					<p className="listing-shipping">{`Shipping: $${(
+						(listingData.shipping * 100) /
+						100
+					).toFixed(2)}`}</p>
 					<div className="listing-quantity-section">
 						<p>Quantity: </p>
 						<div className="listing-quantity-modifier">

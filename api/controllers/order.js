@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
-const { order: Order } = db;
+const { order: Order, listing: Listing } = db;
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const { Op } = require("sequelize");
@@ -28,6 +28,20 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
 	let { data } = req.body;
 
+	for (listing of data.orderDetails.items) {
+		Listing.findByPk(listing.listingID).then((listingInstance) => {
+			if (!listingInstance.isActive) {
+				res.status(400).json({
+					error: "one of the listings is not active",
+				});
+			}
+			if (listingInstance.quantity - listingInstance.quantity < 0) {
+				res.status(400).json({
+					error: "quantity desired exceeds maximum",
+				});
+			}
+		});
+	}
 
 	Order.create(data)
 		.then((newOrder) => {
@@ -35,8 +49,17 @@ router.post("/", (req, res) => {
 		})
 		.catch((err) => {
 			res.status(400).json(err);
-			console.log(err);
 		});
+
+	for (listing of data.orderDetails.items) {
+		Listing.findByPk(listing.listingID).then((listingInstance) => {
+			listingInstance.quantity -= Number(listing.quantity);
+			if (listingInstance.quantity === 0) {
+				listingInstance.isActive = false;
+			}
+			listingInstance.save();
+		});
+	}
 });
 
 router.get("/search/:searchQuery", (req, res) => {

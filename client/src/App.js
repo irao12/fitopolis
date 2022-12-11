@@ -14,6 +14,7 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
 import AccountPage from "./pages/AccountPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
 	return (
@@ -65,6 +66,14 @@ function App() {
 								<Route
 									path="cart"
 									element={<CartPage />}
+								></Route>
+								<Route
+									path="checkout"
+									element={
+										<PrivateRoute>
+											<CheckoutPage />
+										</PrivateRoute>
+									}
 								></Route>
 								<Route path="*" element={<NotFound />}></Route>
 							</Route>

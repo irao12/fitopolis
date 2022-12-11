@@ -20,9 +20,10 @@ const { Op } = require("sequelize");
 //    /listing comes from the file ./listing.js
 
 router.get("/", (req, res) => {
-	Listing.findAll({ order: [["updatedAt", "DESC"]] }).then((allListings) =>
-		res.json(allListings)
-	);
+	Listing.findAll({
+		where: { isActive: true },
+		order: [["updatedAt", "DESC"]],
+	}).then((allListings) => res.json(allListings));
 });
 
 router.post("/", (req, res) => {

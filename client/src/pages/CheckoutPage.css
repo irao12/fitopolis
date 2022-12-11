@@ -1,0 +1,104 @@
+.checkout-page {
+	padding: 5rem;
+	display: flex;
+	flex-direction: column;
+	font-family: "Blinker";
+}
+
+.checkout-page .error-msg {
+	margin-bottom: 2rem;
+	text-align: right;
+	width: 80%;
+}
+
+.checkout-page input.invalid {
+	border-color: red;
+	outline: red;
+}
+
+.checkout-address h1 {
+	margin-bottom: 4rem;
+	font-size: 2.4rem;
+}
+
+.checkout-address {
+	border-bottom: 1px solid black;
+	padding-bottom: 2rem;
+	margin-bottom: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.address-section {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+
+.address-section input {
+	width: min(50%, 30rem);
+	padding: 1rem;
+	border-style: solid;
+	border-radius: 0.5rem;
+}
+
+.checkout-cart h1 {
+	margin-bottom: 2rem;
+}
+
+.checkout-cart-items {
+	border-bottom: 1px solid black;
+	padding-bottom: 2.5rem;
+	margin-bottom: 2.5rem;
+}
+
+.checkout-item {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 2.5rem;
+}
+
+.checkout-item p {
+	font-size: 2rem;
+}
+
+.checkout-cart-section {
+	margin: auto;
+	width: min(90%, 80rem);
+}
+
+.checkout-cart-section > h1 {
+	font-size: 2.4rem;
+	margin-bottom: 5rem;
+}
+
+.checkout-cart-subtotal,
+.checkout-cart-shipping,
+.checkout-cart-total {
+	text-align: right;
+	font-size: 1.6rem;
+	margin-bottom: 2rem;
+}
+
+.checkout-cart-subtotal h2,
+.checkout-cart-shipping h2,
+.checkout-cart-total h2 {
+	font-size: 2.4rem;
+}
+
+.complete-order-button {
+	width: 100%;
+	height: 6rem;
+	border: none;
+	background-color: var(--main-navy);
+	color: white;
+	font-family: "Blinker";
+	font-size: 2.4rem;
+	border-radius: 0.8rem;
+	margin-top: 2rem;
+	cursor: pointer;
+}
