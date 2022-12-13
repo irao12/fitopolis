@@ -1,0 +1,46 @@
+.order-page {
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+	padding: 5rem;
+}
+
+.order-details {
+	margin: 0 auto;
+	width: min(70rem, 90%);
+}
+
+.order-id {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.order-date {
+	border-bottom: solid 1px rgb(203, 203, 203);
+	margin-bottom: 2rem;
+	padding-bottom: 1rem;
+	font-size: 2rem;
+}
+
+.order-item {
+	font-size: 2rem;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+	padding-bottom: 1rem;
+	border-bottom: solid 1px rgb(232, 230, 230);
+}
+
+.order-page .order-subtotal,
+.order-page .order-shipping,
+.order-page .order-total {
+	font-size: 2rem;
+	margin-bottom: 2rem;
+	text-align: right;
+}
+
+.order-not-found {
+	font-family: "Blinker";
+	font-size: 5rem;
+	margin: 4rem 0;
+	text-align: center;
+}

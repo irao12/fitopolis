@@ -94,6 +94,9 @@ export default function CheckoutPage() {
 							buyerID: auth.user.id,
 							orderDetails: {
 								items: listingsBelongingToSeller,
+								subtotal: cartContext.subtotal,
+								total: cartContext.total,
+								shippingTotal: cartContext.shippingTotal,
 							},
 							address: `${addressInfo.name}\n${addressInfo.address}\n${addressInfo.city}, ${addressInfo.zipcode}`,
 							tracking: "",

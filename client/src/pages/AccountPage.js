@@ -8,8 +8,11 @@ export default function AccountPage() {
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	const navigateToOrders = () => {
-		navigate("/orders");
+	const navigateToBuyerOrders = () => {
+		navigate("/orders/buyer");
+	};
+	const navigateToSellerOrders = () => {
+		navigate("/orders/seller");
 	};
 
 	const navigateToCreateListing = () => {
@@ -23,7 +26,14 @@ export default function AccountPage() {
 					Hello! {auth.user.firstName}
 				</h1>
 				<div className="account-actions">
-					<Button text="View Orders" handleClick={navigateToOrders} />
+					<Button
+						text="View Buyer Orders"
+						handleClick={navigateToBuyerOrders}
+					/>
+					<Button
+						text="View Seller Orders"
+						handleClick={navigateToSellerOrders}
+					/>
 					<Button
 						text="Create a Listing"
 						handleClick={navigateToCreateListing}

@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const { order: Order, listing: Listing } = db;
-const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const { Op } = require("sequelize");
 
 // This is a simple example for providing basic CRUD routes for
 // a resource/model. It provides the following:
@@ -23,6 +21,28 @@ router.get("/", (req, res) => {
 	Order.findAll({ order: [["updatedAt", "DESC"]] }).then((allOrders) =>
 		res.json(allOrders)
 	);
+});
+
+router.get("/buyer/:buyerID", (req, res) => {
+	const { buyerID } = req.params;
+
+	Order.findAll({
+		where: {
+			buyerID: buyerID,
+		},
+		order: [["updatedAt", "DESC"]],
+	}).then((allOrders) => res.json(allOrders));
+});
+
+router.get("/seller/:sellerID", (req, res) => {
+	const { sellerID } = req.params;
+
+	Order.findAll({
+		where: {
+			sellerID: sellerID,
+		},
+		order: [["updatedAt", "DESC"]],
+	}).then((allOrders) => res.json(allOrders));
 });
 
 router.post("/", (req, res) => {
@@ -60,23 +80,6 @@ router.post("/", (req, res) => {
 			listingInstance.save();
 		});
 	}
-});
-
-router.get("/search/:searchQuery", (req, res) => {
-	const { searchQuery } = req.params;
-
-	Order.findAll({
-		where: {
-			[Op.or]: [
-				{
-					orderDetails: {
-						[Op.iRegexp]: `.*${searchQuery}.*`,
-					},
-				},
-			],
-		},
-		order: [["updatedAt", "DESC"]],
-	}).then((allOrders) => res.json(allOrders));
 });
 
 router.get("/:orderID", (req, res) => {

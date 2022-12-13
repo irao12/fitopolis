@@ -4,7 +4,7 @@ import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import OrderHistory from "./pages/OrderHistory";
+import BuyerOrderHistory from "./pages/BuyerOrderHistory";
 import UploadListing from "./pages/UploadListing";
 import CatalogPage from "./pages/CatalogPage";
 import ListingPage from "./pages/ListingPage";
@@ -15,6 +15,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import { CartProvider } from "./context/CartContext";
 import AccountPage from "./pages/AccountPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import SellerOrderHistory from "./pages/SellerOrderHistory";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
 	return (
@@ -42,9 +44,31 @@ function App() {
 										</PrivateRoute>
 									}
 								></Route>
+								<Route path="orders">
+									<Route
+										path="buyer"
+										element={
+											<PrivateRoute>
+												<BuyerOrderHistory />
+											</PrivateRoute>
+										}
+									></Route>
+									<Route
+										path="seller"
+										element={
+											<PrivateRoute>
+												<SellerOrderHistory />
+											</PrivateRoute>
+										}
+									></Route>
+								</Route>
 								<Route
-									path="orders"
-									element={<OrderHistory />}
+									path="orders/:id"
+									element={
+										<PrivateRoute>
+											<OrderPage />
+										</PrivateRoute>
+									}
 								></Route>
 
 								<Route
