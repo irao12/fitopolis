@@ -102,7 +102,7 @@ export default function SignUp() {
 			}).then((response) => {
 				if (response.ok) {
 					alert("Account was successfully created");
-					// navigate("/");
+					navigate("/");
 				} else {
 					alert("There was an error creating the account");
 				}
