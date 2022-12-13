@@ -21,8 +21,8 @@ export default function Login(props) {
 	const [isEmailValid, setIsEmailValid] = useState(true);
 	const [isPasswordValid, setIsPasswordValid] = useState(true);
 
-	const validateEmail = () => {
-		if (email === "") {
+	const validateEmail = (emailInput) => {
+		if (emailInput.trim() === "") {
 			setIsEmailValid(false);
 			return false;
 		}
@@ -30,8 +30,8 @@ export default function Login(props) {
 		return true;
 	};
 
-	const validatePassword = () => {
-		if (password === "") {
+	const validatePassword = (passwordInput) => {
+		if (passwordInput.trim() === "") {
 			setIsPasswordValid(false);
 			return false;
 		}
@@ -46,8 +46,8 @@ export default function Login(props) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const emailValid = validateEmail();
-		const passwordValid = validatePassword();
+		const emailValid = validateEmail(email);
+		const passwordValid = validatePassword(password);
 		if (!emailValid || !passwordValid) return;
 
 		auth.authenticate(email, password)
@@ -72,7 +72,11 @@ export default function Login(props) {
 						id="email"
 						name="email"
 						value={email}
-						onChange={(e) => handleChange(e)}
+						onChange={(e) => {
+							validateEmail(e.target.value);
+							handleChange(e);
+						}}
+						className={isEmailValid ? "" : "invalid"}
 					/>
 					{!isEmailValid && (
 						<Error message="* Please enter an email" />
@@ -84,7 +88,12 @@ export default function Login(props) {
 						id="password"
 						name="password"
 						value={password}
-						onChange={(e) => handleChange(e)}
+						className={isPasswordValid ? "" : "invalid"}
+						onChange={(e) => {
+							validatePassword(e.target.value);
+
+							handleChange(e);
+						}}
 					/>
 
 					{!isPasswordValid && (

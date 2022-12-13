@@ -1,6 +1,6 @@
 .login-page,
-.sign-up-pade {
-	height: calc(100% - var(--navbar-height));
+.sign-up-page {
+	min-height: calc(100% - var(--navbar-height));
 	display: flex;
 }
 
@@ -29,8 +29,10 @@
 	margin: auto;
 	padding: 0.5rem 0;
 }
-.login-form .error-msg {
+.login-form .error-msg,
+.sign-up-page .error-msg {
 	text-align: left;
+	margin-bottom: 1rem;
 }
 
 label {
@@ -45,6 +47,13 @@ label {
 	padding: 1rem;
 	border-color: black;
 	border-radius: 1rem;
+}
+
+.login-form input.invalid,
+.signUp-form input.invalid {
+	border-color: red;
+	border-style: solid;
+	outline-color: red;
 }
 
 .login-form button,

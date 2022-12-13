@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Error from "../components/Error";
 import "./Login&SignUpPage.css";
 
 export default function SignUp() {
@@ -15,12 +16,75 @@ export default function SignUp() {
 
 	const { firstName, lastName, email, password, confirmPassword } = inputs;
 
+	const [isFirstNameValid, setIsFirstNameValid] = useState(true);
+	const [isLastNameValid, setIsLastNameValid] = useState(true);
+	const [isEmailValid, setIsEmailValid] = useState(true);
+	const [isPasswordValid, setIsPasswordValid] = useState(true);
+	const [isConfirmValid, setIsConfirmValid] = useState(true);
+
+	const validateFirstName = (firstNameInput) => {
+		if (firstNameInput.trim() === "") {
+			setIsFirstNameValid(false);
+			return false;
+		}
+		setIsFirstNameValid(true);
+		return true;
+	};
+	const validateLastName = (lastNameInput) => {
+		if (lastNameInput.trim() === "") {
+			setIsLastNameValid(false);
+			return false;
+		}
+		setIsLastNameValid(true);
+		return true;
+	};
+	const validateEmail = (emailInput) => {
+		if (emailInput.trim() === "" || email.indexOf("@") < 0) {
+			setIsEmailValid(false);
+			return false;
+		}
+		setIsEmailValid(true);
+		return true;
+	};
+	const validatePassword = (passwordInput) => {
+		if (passwordInput.trim() === "" || passwordInput.length < 7) {
+			setIsPasswordValid(false);
+			return false;
+		}
+		setIsPasswordValid(true);
+		return true;
+	};
+	const validateConfirmation = (confirmPasswordInput) => {
+		if (confirmPasswordInput !== password) {
+			setIsConfirmValid(false);
+			return false;
+		}
+		setIsConfirmValid(true);
+		return true;
+	};
+
 	const handleInputChange = (event) => {
 		setInputs({ ...inputs, [event.target.name]: event.target.value });
 	};
 
 	const onSubmitForm = async (event) => {
 		event.preventDefault();
+
+		const firstNameValid = validateFirstName(firstName);
+		const lastNameValid = validateLastName(lastName);
+		const emailValid = validateEmail(email);
+		const passwordValid = validatePassword(password);
+		const confirmValid = validateConfirmation(confirmPassword);
+
+		if (
+			!firstNameValid ||
+			!lastNameValid ||
+			!emailValid ||
+			!passwordValid ||
+			!confirmValid
+		) {
+			return;
+		}
 
 		try {
 			const body = {
@@ -31,15 +95,18 @@ export default function SignUp() {
 				confirmPassword,
 			};
 
-			const response = await fetch("/api/auth/signup", {
+			fetch("/api/auth/signup", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
+			}).then((response) => {
+				if (response.ok) {
+					alert("Account was successfully created");
+					// navigate("/");
+				} else {
+					alert("There was an error creating the account");
+				}
 			});
-
-			const parseResponse = await response.json();
-			alert(`${parseResponse.email}, your account created successfully!`);
-			navigate("/");
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -56,8 +123,15 @@ export default function SignUp() {
 						id="firstName"
 						name="firstName"
 						value={firstName}
-						onChange={(event) => handleInputChange(event)}
+						className={isFirstNameValid ? "" : "invalid"}
+						onChange={(event) => {
+							handleInputChange(event);
+							validateFirstName(event.target.value);
+						}}
 					/>
+					{!isFirstNameValid && (
+						<Error message="* Please enter a first name" />
+					)}
 
 					<label htmlFor="lastName">Last Name</label>
 					<input
@@ -65,8 +139,15 @@ export default function SignUp() {
 						id="lastName"
 						name="lastName"
 						value={lastName}
-						onChange={(event) => handleInputChange(event)}
+						className={isLastNameValid ? "" : "invalid"}
+						onChange={(event) => {
+							handleInputChange(event);
+							validateLastName(event.target.value);
+						}}
 					/>
+					{!isLastNameValid && (
+						<Error message="* Please enter a last name" />
+					)}
 
 					<label htmlFor="email">Email</label>
 					<input
@@ -74,8 +155,15 @@ export default function SignUp() {
 						id="email"
 						name="email"
 						value={email}
-						onChange={(event) => handleInputChange(event)}
+						className={isEmailValid ? "" : "invalid"}
+						onChange={(event) => {
+							handleInputChange(event);
+							validateEmail(event.target.value);
+						}}
 					/>
+					{!isEmailValid && (
+						<Error message="* Please enter an email" />
+					)}
 
 					<label htmlFor="password">Password</label>
 					<input
@@ -83,8 +171,15 @@ export default function SignUp() {
 						id="password"
 						name="password"
 						value={password}
-						onChange={(event) => handleInputChange(event)}
+						className={isPasswordValid ? "" : "invalid"}
+						onChange={(event) => {
+							handleInputChange(event);
+							validatePassword(event.target.value);
+						}}
 					/>
+					{!isPasswordValid && (
+						<Error message="* Please enter a password with at least 7 characters" />
+					)}
 
 					<label htmlFor="confirmPassword">Confirm Password</label>
 					<input
@@ -92,8 +187,15 @@ export default function SignUp() {
 						id="confirmPassword"
 						name="confirmPassword"
 						value={confirmPassword}
-						onChange={(event) => handleInputChange(event)}
+						className={isConfirmValid ? "" : "invalid"}
+						onChange={(event) => {
+							handleInputChange(event);
+							validateConfirmation(event.target.value);
+						}}
 					/>
+					{!isConfirmValid && (
+						<Error message="* Password and confirmation are not the same" />
+					)}
 
 					<button type="submit">Submit</button>
 				</form>
