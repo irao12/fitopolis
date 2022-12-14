@@ -40,7 +40,7 @@ export default function SellerOrderHistory() {
 				<div className="description">
 					<div style={{ fontSize: 33, paddingBottom: "10px" }}>
 						{" "}
-						Seller Order History
+						Your Selling History
 					</div>
 					<div className="order-list">
 						{orders.length > 0 ? (

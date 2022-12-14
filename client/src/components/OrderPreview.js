@@ -12,7 +12,8 @@ export default function OrderPreview({ orderInfo }) {
 		<div className="order">
 			<div>Order ID: {orderID}</div>
 			<div>Date purchased: {format(dateObject, "PP")} </div>
-			<div>{orderInfo.completed ? "Completed" : "Not Completed"}</div>
+			
+			<div>Tracking: {orderInfo.completed ? "Completed" : "Not Completed"}</div>
 			<Button
 				text="View Details"
 				handleClick={() => {

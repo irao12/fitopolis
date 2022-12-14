@@ -63,7 +63,7 @@ export default function OrderPage() {
 					<h1 className="order-id">Order ID: {orderID}</h1>
 
 					<h3 className="order-date">
-						Date of Order: {format(dateCreatedObject, "PP")}
+						Order date: {format(dateCreatedObject, "PP")}
 					</h3>
 
 					<div className="order-address">
@@ -79,10 +79,11 @@ export default function OrderPage() {
 						{orderDetails.map((item, index) => (
 							<div key={index} className="order-item">
 								<p>
-									{item.title} x {item.quantity}
+									<strong> {item.title}</strong>, ${item.price} each
 								</p>
-
-								<p>${item.price}</p>
+								<p>
+								Qty: {item.quantity}
+								</p>
 							</div>
 						))}
 					</div>
