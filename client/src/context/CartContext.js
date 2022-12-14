@@ -29,7 +29,6 @@ const CartProvider = ({ children }) => {
 			}
 		}
 
-		console.log(newSellers);
 		await setCartInfo(listing_info);
 		await setSubtotal(newSubtotal);
 		await setShippingTotal(newShippingTotal);

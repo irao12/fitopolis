@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import "./ListingPage.css";
 import ImageCarousel from "../components/ImageCarousel";
 import { CartContext } from "../context/CartContext";
+import Loading from "../components/Loading";
 
 export default function ListingPage() {
-	const [loading, setLoading] = React.useState(false);
+	const [isLoading, setIsLoading] = React.useState(false);
 	const [listingData, setListingData] = React.useState({});
 	const [quantity, setQuantity] = React.useState(1);
 	const [displayAdded, setDisplayAdded] = React.useState(false);
@@ -31,15 +32,15 @@ export default function ListingPage() {
 	};
 
 	const getListingData = async () => {
-		setLoading(true);
+		setIsLoading(true);
 		try {
 			let response = await fetch(`/api/listing/${id}`);
 			const listingData = await response.json();
 			setListingData(listingData);
-			setLoading(false);
 		} catch (error) {
 			console.error(error);
 		}
+		setIsLoading(false);
 	};
 
 	const addListingToCart = () => {
@@ -52,62 +53,69 @@ export default function ListingPage() {
 
 	return (
 		<main className="listing-page">
-			<div className="listing-page-top">
-				<ImageCarousel images={listingData.images} />
-				<div className="listing-page-info">
-					<h1 className="listing-title">{listingData.title}</h1>
-					<p className="listing-condition">{`Condition: ${listingData.condition}`}</p>
-					<p className="listing-price">{`Price: $${(
-						(listingData.price * 100) /
-						100
-					).toFixed(2)}`}</p>
-					<p className="listing-shipping">{`Shipping: $${(
-						(listingData.shipping * 100) /
-						100
-					).toFixed(2)}`}</p>
-					<div className="listing-quantity-section">
-						<p>Quantity: </p>
-						<div className="listing-quantity-modifier">
-							<button
-								className="change-quantity-button"
-								type="button"
-								onClick={decrementQuantity}
-							>
-								-
-							</button>
-							<input
-								type="number"
-								value={quantity}
-								onChange={handleQuantityChange}
-							></input>
-							<button
-								className="change-quantity-button"
-								type="button"
-								onClick={incrementQuantity}
-							>
-								+
-							</button>
+			{!isLoading && (
+				<div className="listing-page-top">
+					<ImageCarousel images={listingData.images} />
+					<div className="listing-page-info">
+						<h1 className="listing-title">{listingData.title}</h1>
+						<p className="listing-condition">{`Condition: ${listingData.condition}`}</p>
+						<p className="listing-price">{`Price: $${(
+							(listingData.price * 100) /
+							100
+						).toFixed(2)}`}</p>
+						<p className="listing-shipping">{`Shipping: $${(
+							(listingData.shipping * 100) /
+							100
+						).toFixed(2)}`}</p>
+						<div className="listing-quantity-section">
+							<p>Quantity: </p>
+							<div className="listing-quantity-modifier">
+								<button
+									className="change-quantity-button"
+									type="button"
+									onClick={decrementQuantity}
+								>
+									-
+								</button>
+								<input
+									type="number"
+									value={quantity}
+									onChange={handleQuantityChange}
+								></input>
+								<button
+									className="change-quantity-button"
+									type="button"
+									onClick={incrementQuantity}
+								>
+									+
+								</button>
+							</div>
 						</div>
+						<button
+							className="add-to-cart-button"
+							type="button"
+							onClick={() => {
+								addListingToCart();
+								setDisplayAdded(true);
+								setTimeout(() => {
+									setDisplayAdded(false);
+								}, 3000);
+							}}
+						>
+							{displayAdded ? "Added To Cart!" : "Add To Cart"}
+						</button>
 					</div>
-					<button
-						className="add-to-cart-button"
-						type="button"
-						onClick={() => {
-							addListingToCart();
-							setDisplayAdded(true);
-							setTimeout(() => {
-								setDisplayAdded(false);
-							}, 3000);
-						}}
-					>
-						{displayAdded ? "Added To Cart!" : "Add To Cart"}
-					</button>
 				</div>
-			</div>
-			<div className="listing-description-section">
-				<h1>Item Description</h1>
-				<p className="listing-description">{listingData.description}</p>
-			</div>
+			)}
+			{!isLoading && (
+				<div className="listing-description-section">
+					<h1>Item Description</h1>
+					<p className="listing-description">
+						{listingData.description}
+					</p>
+				</div>
+			)}
+			{isLoading && <Loading />}
 		</main>
 	);
 }

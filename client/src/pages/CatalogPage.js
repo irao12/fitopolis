@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import Listing from "../components/Listing";
+import Loading from "../components/Loading";
 import "./CatalogPage.css";
+import { AuthContext } from "../context/AuthContext";
 
 export default function CatalogPage() {
 	const [listings, setListings] = React.useState([]);
-	const [loading, setLoading] = React.useState(true);
-	const [page, setPage] = React.useState(1);
+	const [isLoading, setIsLoading] = React.useState(true);
+	const auth = useContext(AuthContext);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const searchTerm = searchParams.get("search");
 
 	const getListings = async () => {
-		setLoading(true);
+		setIsLoading(true);
 		if (searchTerm === "") {
 			try {
 				let response = await fetch("/api/listing");
 				let allListings = await response.json();
 				setListings(allListings);
-				setLoading(false);
 			} catch (error) {
 				console.error(error);
 			}
@@ -28,11 +29,11 @@ export default function CatalogPage() {
 				let response = await fetch(`/api/listing/search/${searchTerm}`);
 				let allListings = await response.json();
 				setListings(allListings);
-				setLoading(false);
 			} catch (error) {
 				console.error(error);
 			}
 		}
+		setIsLoading(false);
 	};
 
 	React.useEffect(() => {
@@ -41,20 +42,28 @@ export default function CatalogPage() {
 
 	return (
 		<div className="catalog-page">
-			<div className="catalog-section">
-				{listings.length === 0 && (
-					<div className="no-results-message">No Results</div>
-				)}
-				{listings.length > 0 && (
-					<div className="listings-container">
-						{listings.map((listing, index) => {
-							return (
-								<Listing key={index} listingData={listing} />
-							);
-						})}
-					</div>
-				)}
-			</div>
+			{!isLoading && listings.length > 0 && (
+				<div className="catalog-section">
+					{listings.length > 0 && (
+						<div className="listings-container">
+							{listings.map((listing, index) => {
+								return (
+									listing.sellerID !== auth.user.id && (
+										<Listing
+											key={index}
+											listingData={listing}
+										/>
+									)
+								);
+							})}
+						</div>
+					)}
+				</div>
+			)}
+			{listings.length === 0 && !isLoading && (
+				<div className="no-results-message">No Results</div>
+			)}
+			{isLoading && <Loading />}
 		</div>
 	);
 }

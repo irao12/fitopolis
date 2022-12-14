@@ -6,10 +6,12 @@ import Error from "../components/Error";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import Loading from "../components/Loading";
 
 export default function UploadListing() {
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [formData, setFormData] = useState({
 		title: "",
@@ -166,12 +168,11 @@ export default function UploadListing() {
 		if (!validateForm()) {
 			return;
 		}
-		console.log("submitted");
-
 		const imageList = formData.imageList.map((image) => {
 			return image.data_url;
 		});
 
+		setIsLoading(true);
 		try {
 			let response = await fetch("/api/listing", {
 				method: "POST",
@@ -196,116 +197,124 @@ export default function UploadListing() {
 		} catch (error) {
 			console.error("Server error while creating a new listing", error);
 		}
+		setIsLoading(false);
 	};
 
 	return (
 		<main className="upload-page">
-			<h1>Create a Listing</h1>
-			<form className="upload-form" onSubmit={handleSubmit}>
-				<label htmlFor="title">Title:</label>
-				<input
-					type="text"
-					name="title"
-					id="title"
-					value={formData.title}
-					onChange={handleFormChange}
-					className={!isTitleValid ? "invalid" : ""}
-				></input>
-				{!isTitleValid && <Error message="* Title cannot be empty" />}
+			{!isLoading && (
+				<>
+					<h1>Create a Listing</h1>
+					<form className="upload-form" onSubmit={handleSubmit}>
+						<label htmlFor="title">Title:</label>
+						<input
+							type="text"
+							name="title"
+							id="title"
+							value={formData.title}
+							onChange={handleFormChange}
+							className={!isTitleValid ? "invalid" : ""}
+						></input>
+						{!isTitleValid && (
+							<Error message="* Title cannot be empty" />
+						)}
 
-				<label htmlFor="description">Description: </label>
-				<textarea
-					name="description"
-					id="description"
-					maxLength={400}
-					value={formData.description}
-					onChange={handleFormChange}
-				></textarea>
+						<label htmlFor="description">Description: </label>
+						<textarea
+							name="description"
+							id="description"
+							maxLength={400}
+							value={formData.description}
+							onChange={handleFormChange}
+						></textarea>
 
-				<label>Images</label>
-				<ListingImageUploader
-					value={formData.imageList}
-					onChange={handleImageChange}
-					maxNumber={maxImageCount}
-				></ListingImageUploader>
-				{!isImageListValid && (
-					<Error message="* Must include at least one image" />
-				)}
+						<label>Images</label>
+						<ListingImageUploader
+							value={formData.imageList}
+							onChange={handleImageChange}
+							maxNumber={maxImageCount}
+						></ListingImageUploader>
+						{!isImageListValid && (
+							<Error message="* Must include at least one image" />
+						)}
 
-				<label htmlFor="condition">Condition</label>
-				<Select
-					name="condition"
-					value={conditionOption}
-					onChange={handleConditionChange}
-					placeholder=""
-					options={conditionOptions}
-					className="react-select-container"
-					classNamePrefix="react-select"
-					defaultValue={{ label: 2002, value: 2002 }}
-				/>
-				{!isConditionValid && (
-					<Error message="* Must select a condition"></Error>
-				)}
+						<label htmlFor="condition">Condition</label>
+						<Select
+							name="condition"
+							value={conditionOption}
+							onChange={handleConditionChange}
+							placeholder=""
+							options={conditionOptions}
+							className="react-select-container"
+							classNamePrefix="react-select"
+							defaultValue={{ label: 2002, value: 2002 }}
+						/>
+						{!isConditionValid && (
+							<Error message="* Must select a condition"></Error>
+						)}
 
-				<label htmlFor="price">Price:</label>
-				<div className="input-group price-group">
-					<p>$</p>
-					<input
-						type="number"
-						name="price"
-						id="price"
-						min="0"
-						step="0.01"
-						value={formData.price}
-						onChange={handleFormChange}
-						required
-						className={!isPriceValid ? "invalid" : ""}
-					></input>
-				</div>
-				{!isPriceValid && (
-					<Error message="* Price must be greater than 0" />
-				)}
+						<label htmlFor="price">Price:</label>
+						<div className="input-group price-group">
+							<p>$</p>
+							<input
+								type="number"
+								name="price"
+								id="price"
+								min="0"
+								step="0.01"
+								value={formData.price}
+								onChange={handleFormChange}
+								required
+								className={!isPriceValid ? "invalid" : ""}
+							></input>
+						</div>
+						{!isPriceValid && (
+							<Error message="* Price must be greater than 0" />
+						)}
 
-				<label htmlFor="shipping">Shipping Fee:</label>
-				<div className="input-group shipping-group">
-					<p>$</p>
-					<input
-						type="number"
-						name="shipping"
-						id="shipping"
-						min="0"
-						step="0.01"
-						value={formData.shipping}
-						onChange={handleFormChange}
-						required
-						className={!isShippingValid ? "invalid" : ""}
-					></input>
-				</div>
+						<label htmlFor="shipping">Shipping Fee:</label>
+						<div className="input-group shipping-group">
+							<p>$</p>
+							<input
+								type="number"
+								name="shipping"
+								id="shipping"
+								min="0"
+								step="0.01"
+								value={formData.shipping}
+								onChange={handleFormChange}
+								required
+								className={!isShippingValid ? "invalid" : ""}
+							></input>
+						</div>
 
-				{!isShippingValid && (
-					<Error message="* Shipping must be 0 or higher" />
-				)}
+						{!isShippingValid && (
+							<Error message="* Shipping must be 0 or higher" />
+						)}
 
-				<label htmlFor="quantity">Quantity</label>
-				<input
-					type="number"
-					name="quantity"
-					id="quantity"
-					min="0"
-					max="100"
-					value={formData.quantity}
-					onChange={handleFormChange}
-					required
-					className={!isQuantityValid ? "invalid" : ""}
-				></input>
-				{!isQuantityValid && (
-					<Error message="* Quantity must be greater or equal to 0" />
-				)}
+						<label htmlFor="quantity">Quantity</label>
+						<input
+							type="number"
+							name="quantity"
+							id="quantity"
+							min="0"
+							max="100"
+							value={formData.quantity}
+							onChange={handleFormChange}
+							required
+							className={!isQuantityValid ? "invalid" : ""}
+						></input>
+						{!isQuantityValid && (
+							<Error message="* Quantity must be greater or equal to 0" />
+						)}
 
-				<button className="create-listing-btn" type="submit">
-					Create Listing
-				</button>
-			</form>
+						<button className="create-listing-btn" type="submit">
+							Create Listing
+						</button>
+					</form>
+				</>
+			)}
+			{isLoading && <Loading />}
 		</main>
 	);
 }

@@ -5,6 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import Button from "../components/Button";
 import Error from "../components/Error";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 export default function CheckoutPage() {
 	const cartContext = useContext(CartContext);
@@ -20,6 +21,7 @@ export default function CheckoutPage() {
 	const [isAddressValid, setIsAddressValid] = useState(true);
 	const [isCityValid, setIsCityValid] = useState(true);
 	const [isZipcodeValid, setIsZipcodeValid] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleAddressChange = (event) => {
 		setAddressInfo({
@@ -81,6 +83,7 @@ export default function CheckoutPage() {
 					});
 				}
 			});
+			setIsLoading(true);
 			try {
 				let response = await fetch("/api/order", {
 					method: "POST",
@@ -106,109 +109,126 @@ export default function CheckoutPage() {
 				});
 			} catch (error) {
 				console.error("Server error while creating a new order", error);
+				setIsLoading(false);
 				return;
 			}
+			setIsLoading(false);
 			await cartContext.clearCart();
+			alert("Order was created!");
 			navigate("/cart");
 		}
 	};
 
 	return (
 		<div className="checkout-page">
-			<div className="checkout-cart-section">
-				<h1>Checkout</h1>
+			{!isLoading && (
+				<div className="checkout-cart-section">
+					<h1>Checkout</h1>
 
-				<div className="checkout-address">
-					<h1>Enter an Address</h1>
-					<div className="address-section">
-						<label htmlFor="checkout-first-name">Name:</label>
-						<input
-							id="checkout-name"
-							name="name"
-							type="text"
-							value={addressInfo.firstName}
-							onChange={(e) => handleAddressChange(e)}
-							className={isNameValid ? "" : "invalid"}
-						></input>
-					</div>
-					{!isNameValid && <Error message="* Name cannot be empty" />}
-					<div className="address-section">
-						<label htmlFor="checkout-address-line">Address:</label>
-						<input
-							id="checkout-address-line"
-							type="text"
-							name="address"
-							value={addressInfo.address}
-							onChange={(e) => handleAddressChange(e)}
-							className={isAddressValid ? "" : "invalid"}
-						></input>
-					</div>
-					{!isAddressValid && (
-						<Error message="* Address cannot be empty" />
-					)}
+					<div className="checkout-address">
+						<h1>Enter a Shipping Address</h1>
+						<div className="address-section">
+							<label htmlFor="checkout-first-name">Name:</label>
+							<input
+								id="checkout-name"
+								name="name"
+								type="text"
+								value={addressInfo.firstName}
+								onChange={(e) => handleAddressChange(e)}
+								className={isNameValid ? "" : "invalid"}
+							></input>
+						</div>
+						{!isNameValid && (
+							<Error message="* Name cannot be empty" />
+						)}
+						<div className="address-section">
+							<label htmlFor="checkout-address-line">
+								Address:
+							</label>
+							<input
+								id="checkout-address-line"
+								type="text"
+								name="address"
+								value={addressInfo.address}
+								onChange={(e) => handleAddressChange(e)}
+								className={isAddressValid ? "" : "invalid"}
+							></input>
+						</div>
+						{!isAddressValid && (
+							<Error message="* Address cannot be empty" />
+						)}
 
-					<div className="address-section">
-						<label htmlFor="checkout-city">City:</label>
-						<input
-							id="checkout-city"
-							type="text"
-							name="city"
-							value={addressInfo.city}
-							onChange={(e) => handleAddressChange(e)}
-							className={isCityValid ? "" : "invalid"}
-						></input>
-					</div>
-					{!isCityValid && <Error message="* City cannot be empty" />}
+						<div className="address-section">
+							<label htmlFor="checkout-city">City:</label>
+							<input
+								id="checkout-city"
+								type="text"
+								name="city"
+								value={addressInfo.city}
+								onChange={(e) => handleAddressChange(e)}
+								className={isCityValid ? "" : "invalid"}
+							></input>
+						</div>
+						{!isCityValid && (
+							<Error message="* City cannot be empty" />
+						)}
 
-					<div className="address-section">
-						<label htmlFor="checkout-zipcode">Zipcode:</label>
-						<input
-							id="checkout-zipcode"
-							type="text"
-							name="zipcode"
-							maxLength={5}
-							value={addressInfo.zipcode}
-							onChange={(e) => handleAddressChange(e)}
-							className={isZipcodeValid ? "" : "invalid"}
-						></input>
+						<div className="address-section">
+							<label htmlFor="checkout-zipcode">Zipcode:</label>
+							<input
+								id="checkout-zipcode"
+								type="text"
+								name="zipcode"
+								maxLength={5}
+								value={addressInfo.zipcode}
+								onChange={(e) => handleAddressChange(e)}
+								className={isZipcodeValid ? "" : "invalid"}
+							></input>
+						</div>
+						{!isZipcodeValid && (
+							<Error message="* Zipcode must be 5 digits" />
+						)}
 					</div>
-					{!isZipcodeValid && (
-						<Error message="* Zipcode must be 5 digits" />
-					)}
-				</div>
 
-				<div className="checkout-cart">
-					<h1>Cart</h1>
-					<div className="checkout-cart-items">
-						{cartContext.cartInfo.map((cartItem) => (
-							<div className="checkout-item">
-								<p>
-									{cartItem.title} x{" "}
-									{cartItem.quantityDesired}
-								</p>
-								<p>
-									${cartItem.price * cartItem.quantityDesired}
-								</p>
-							</div>
-						))}
+					<div className="checkout-cart">
+						<h1>Cart</h1>
+						<div className="checkout-cart-items">
+							{cartContext.cartInfo.map((cartItem) => (
+								<div className="checkout-item">
+									<p>
+										{cartItem.title} x{" "}
+										{cartItem.quantityDesired}
+									</p>
+									<p>
+										$
+										{cartItem.price *
+											cartItem.quantityDesired}
+									</p>
+								</div>
+							))}
+							{cartContext.cart.length === 0 && (
+								<Error message="* Cart cannot be empty" />
+							)}
+						</div>
 					</div>
-				</div>
 
-				<div className="checkout-cart-subtotal">
-					<h2>{`Subtotal: $${cartContext.subtotal}`}</h2>
+					<div className="checkout-cart-subtotal">
+						<h2>{`Subtotal: $${cartContext.subtotal}`}</h2>
+					</div>
+					<div className="checkout-cart-shipping">
+						<h2>{`Shipping: $${cartContext.shippingTotal}`}</h2>
+					</div>
+					<div className="checkout-cart-total">
+						<h2>{`Total: $${cartContext.total}`}</h2>
+					</div>
+					<Button
+						className="complete-order-button"
+						text="Complete Order"
+						handleClick={completeOrder}
+					/>
 				</div>
-				<div className="checkout-cart-shipping">
-					<h2>{`Shipping: $${cartContext.shippingTotal}`}</h2>
-				</div>
-				<div className="checkout-cart-total">
-					<h2>{`Total: $${cartContext.total}`}</h2>
-				</div>
-				<Button
-					className="complete-order-button"
-					text="Complete Order"
-					handleClick={completeOrder}
-				/>
-			</div>
+			)}
+			{isLoading && <Loading />}
 		</div>
 	);
 }

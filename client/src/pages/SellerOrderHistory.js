@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import OrderPreview from "../components/OrderPreview";
 import "./SellerOrderHistory.css";
+import Loading from "../components/Loading";
 
 export default function SellerOrderHistory() {
 	const auth = useContext(AuthContext);
@@ -14,9 +15,11 @@ export default function SellerOrderHistory() {
 	// const [tracking, setTracking] = useState("");
 	// const [completed, setCompleted] = useState("");
 	const [orders, setOrders] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	// This runs on-mount if you pass it an empty array as second param
 	useEffect(() => {
+		setIsLoading(true);
 		fetch(`/api/order/seller/${auth.user.id}`)
 			.then((response) => response.json())
 			.then((resp) => {
@@ -28,25 +31,29 @@ export default function SellerOrderHistory() {
 			.catch((err) => {
 				//handle error
 			});
+		setIsLoading(false);
 	}, []);
 
 	return (
 		<main className="seller-order-page">
-			<div className="description">
-				<div style={{ fontSize: 33, paddingBottom: "10px" }}>
-					{" "}
-					Seller Order History
+			{!isLoading && (
+				<div className="description">
+					<div style={{ fontSize: 33, paddingBottom: "10px" }}>
+						{" "}
+						Seller Order History
+					</div>
+					<div className="order-list">
+						{orders.length > 0 ? (
+							orders.map((orderInfo) => (
+								<OrderPreview orderInfo={orderInfo} />
+							))
+						) : (
+							<p>No Orders Yet</p>
+						)}
+					</div>
 				</div>
-				<div className="order-list">
-					{orders.length > 0 ? (
-						orders.map((orderInfo) => (
-							<OrderPreview orderInfo={orderInfo} />
-						))
-					) : (
-						<p>No Orders Yet</p>
-					)}
-				</div>
-			</div>
+			)}
+			{isLoading && <Loading />}
 		</main>
 	);
 }
