@@ -1,6 +1,6 @@
 # Fitopolis
 
-A full stack ecommerce web application with React, Express.js, and Sequelize.js
+A full stack ecommerce web application with React, Express.js, and Sequelize.js.
 
 **Current version:** 2022.2 (Oct 2022)
 
@@ -10,38 +10,32 @@ A full stack ecommerce web application with React, Express.js, and Sequelize.js
 
 _Backend API_
 
-- express.js (v4.18.2)
-- sequelize.js (v6.25.2)
-- PostgreSQL (v14 recommended)
+-   express.js (v4.18.2)
+-   sequelize.js (v6.25.2)
+-   PostgreSQL (v14 recommended)
 
 _Frontend React client_
 
-- Based on `create-react-app`
-  - pre-configured to work with the api
-- Bootstrap (v5)
-  - added to `/client/public/index.html` (_optional_ can be removed)
-- React Router (v6)
-
-## Development Setup
-
-Each team member will need to do this on their local machine.
+-   Based on `create-react-app`
+    -   pre-configured to work with the api
+-   React Router (v6)
 
 ### Ensure you have PostgreSQL installed
 
-- Check if you have PostgreSQL installed
-  - ✅ versions 10-14 should work
-  - 🚫 version 15 has not been tested
-- If you need to install PostgreSQL see the [installing PostgreSQL guides](https://github.com/CUNYTechPrep/guides#postgresql)
+-   Check if you have PostgreSQL installed
+    -   ✅ versions 10-14 should work
+    -   🚫 version 15 has not been tested
+-   If you need to install PostgreSQL see the [installing PostgreSQL guides](https://github.com/CUNYTechPrep/guides#postgresql)
 
 ### Create a PostgreSQL user and database
 
 The project-starter template expects the following for local development:
 
-- PostgreSQL User/Role
-  - name: `ctp_user`
-  - password: `ctp_pass`
-- PostgreSQL Database
-  - name: `ctp_appdb_development`
+-   PostgreSQL User/Role
+    -   name: `ctp_user`
+    -   password: `ctp_pass`
+-   PostgreSQL Database
+    -   name: `ctp_appdb_development`
 
 #### For Windows/pgAdmin users
 
@@ -86,54 +80,10 @@ npm install
 npm start
 ```
 
-- api-backend will launch at: http://localhost:8080
-- react-client will launch at: http://localhost:3000
+-   api-backend will launch at: http://localhost:8080
+-   react-client will launch at: http://localhost:3000
 
 > In production you will only deploy a single app. The react client will build into static files that will be served from the backend.
-
-## Deployment
-
-### Hosting on Railway.app (recommended)
-
-1. Create a Starter account using your Github username
-   - You get $5 in credit a month for free and do not have to provide a credit card
-2. Verify your account by answering Railways questions
-3. Create a **"New Project"**
-4. Select **"Deploy from Github repo"**
-   - follow instruction to link your project repo to railway
-5. Click **"Deploy now"**
-   - your app will fail, but we will fix it in the next steps
-6. Add a PostgreSQL Database to your Railway project
-   - click the **"+ New"** button at the top right of the project
-   - click **"Database >"**
-   - click **"Add PostgreSQL"**
-   - to add a PostgreSQL Database to your project
-7. Add environment variables if you need any
-   - Do not add the `PORT` variable (Railway will set this for you)
-
-Your app will now be live and auto deployed on new commits. If it's not working you may need to restart the app manually in the Railway UI.
-
-
-#### Add Environment Variables
-
-Any environment variables your app needs will be available through your heroku project's settings page.
-
-> NOTE: _Heroku calls them **Config Vars**_
-
-- Go to the dashboard page here: https://dashboard.heroku.com/apps
-- Click on the Settings tab
-- Click `Reveal Config Vars`
-- Add any environment variables you have in your `.env` file
-
-#### Deploying the app
-
-Whenever you want to update the deployed app run this command.
-
-```bash
-git push heroku main
-```
-
-> This command deploys your main branch. You can change that and deploy a different branch such as: `git push heroku development`
 
 ## Project Structure
 
