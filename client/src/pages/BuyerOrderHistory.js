@@ -39,7 +39,7 @@ export default function BuyerOrderHistory() {
 				<div className="description">
 					<div style={{ fontSize: 33, paddingBottom: "10px" }}>
 						{" "}
-						Buyer Order History
+						Your Purchase History
 					</div>
 					<div className="order-list">
 						{orders.length > 0 ? (

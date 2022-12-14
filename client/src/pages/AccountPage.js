@@ -23,15 +23,15 @@ export default function AccountPage() {
 		<div className="account-page">
 			<div className="account-section">
 				<h1 className="welcome-message">
-					Hello! {auth.user.firstName}
+					Hello {auth.user.firstName}!
 				</h1>
 				<div className="account-actions">
 					<Button
-						text="View Buyer Orders"
+						text="View your Purchases"
 						handleClick={navigateToBuyerOrders}
 					/>
 					<Button
-						text="View Seller Orders"
+						text="View your Seller History"
 						handleClick={navigateToSellerOrders}
 					/>
 					<Button
